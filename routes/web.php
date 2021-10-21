@@ -31,8 +31,11 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
             return view('admin.home');
         });
 
+        // category aspect
         Route::get('/create-category', 'Categories@create_view');
         Route::post('/create-category', 'Categories@create_now');
+        Route::get('/view-category', 'Categories@view_all');
+
     });
 
 });

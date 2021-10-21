@@ -39,4 +39,9 @@ class Categories extends Controller
 
         return redirect('admin/view-category');
     }
+
+    public function view_all(){
+        $db = DB::select('SELECT * from category ORDER BY c_id DESC', []);
+        return view('admin.category.view')->with('data', ['data'=> $db]);
+    }
 }
