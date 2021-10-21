@@ -14,3 +14,25 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+// user aspect
+
+// Admin aspect
+Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
+
+    Route::get('/login', function () {
+        return view('admin.signin');
+    });
+    Route::post('/login', 'Auth@login_admin');
+    Route::post('/logout', 'Auth@logout_now');
+
+    Route::group(['middleware'=>'admin_auth'], function(){
+        Route::get('/', function () {
+            return view('admin.home');
+        });
+
+        Route::get('/create-category', 'Categories@create_view');
+        Route::post('/create-category', 'Categories@create_now');
+    });
+
+});
