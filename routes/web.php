@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Guest\Home@home');
 
 // user aspect
 
@@ -35,6 +33,8 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
         Route::get('/create-category', 'Categories@create_view');
         Route::post('/create-category', 'Categories@create_now');
         Route::get('/view-category', 'Categories@view_all');
+        Route::get('/edit-category/{c_id}', 'Categories@edit_view');
+        Route::post('/edit-category/{c_id}', 'Categories@edit_now');
 
     });
 
