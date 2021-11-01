@@ -33,12 +33,12 @@ class Auth extends Controller
                 setcookie(sha1('zn_admin_id'),base64_encode($res_data[0]->a_id), (time() + (86400 * 365) ),"/");
                 return redirect(url('/admin'));
             }else{
-                return view('screens.unauth.login')->with('error', 'Account Suspended');
+                return view('admin.signin')->with('error', 'Account Suspended');
                 // return response()->json(["status"=> 2, "message"=>"Account Suspended"], 200);
             }
 
         }else{
-            return view('screens.unauth.login')->with('error', 'account not found on server');
+            return view('admin.signin')->with('error', 'account not found on server');
             // return response()->json(["status"=> 0, "message"=>"account not found on server"], 200);
         }
     }

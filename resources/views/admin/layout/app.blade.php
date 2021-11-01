@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zubi Venture Admin Dashboard | Dashboard</title>
+  <title>Zubic Venture Admin Dashboard | Dashboard</title>
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{url('admin_file/img/svg/logo.svg')}}" type="image/x-icon">
   <!-- Custom styles -->
@@ -74,7 +74,7 @@
     <footer class="footer">
   <div class="container footer--flex">
     <div class="footer-start">
-      <p>2021 © Zubi Dashboard - <a href="elegant-dashboard.com" target="_blank"
+      <p>2021 © Zubic Dashboard - <a href="elegant-dashboard.com" target="_blank"
           rel="noopener noreferrer"></a></p>
     </div>
     <ul class="footer-end">

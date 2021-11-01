@@ -36,6 +36,17 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
         Route::get('/edit-category/{c_id}', 'Categories@edit_view');
         Route::post('/edit-category/{c_id}', 'Categories@edit_now');
 
+        // package aspect
+        Route::get('/create-package', 'Packages@create_view');
+        Route::post('/create-package', 'Packages@create_now');
+        Route::get('/view-packages', 'Packages@view_packages');
+        Route::get('/edit-package/{p_id}', 'Packages@edit_view');
+        Route::post('/edit-package/{p_id}', 'Packages@edit_now');
+        Route::get('/delete-package-other-image/{po_id}', 'Packages@delete_po_now');
+
+        // workers
+        Route::get('/create-worker', 'Workers@create_worker');
+
     });
 
 });
