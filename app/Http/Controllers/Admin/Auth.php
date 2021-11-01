@@ -19,8 +19,8 @@ class Auth extends Controller
             return response()->json(["status"=> 0, "message"=>"password is required"], 200);
         }
 
-        $username = $request->email;
-        $password = $request->password;
+        $username = strtolower($request->email);
+        $password = strtolower($request->password);
         $password = sha1($password);
         //run checker
         $res_data = DB::select('SELECT * from admins where a_username = ? && a_password = ?', [$username, $password]);

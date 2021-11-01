@@ -46,6 +46,10 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
 
         // workers
         Route::get('/create-worker', 'Workers@create_worker');
+        Route::post('/create-worker', 'Workers@create_worker_now');
+        Route::get('/view-workers', 'Workers@view_workers');
+        Route::get('/edit-worker/{a_id}', 'Workers@edit_view');
+        Route::post('/edit-worker/{a_id}', 'Workers@edit_now');
 
     });
 

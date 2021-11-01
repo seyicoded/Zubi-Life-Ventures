@@ -15,7 +15,7 @@
                 <th>Image</th>
                 <th>Date</th>
                 <th>Status</th>
-                <th>Attion</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>

@@ -13,7 +13,7 @@
                 <th>Mini Desc</th>
                 <th>Image</th>
                 <th>Date</th>
-                <th>Attion</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
