@@ -23,6 +23,7 @@
                     <td>{{$dt->a_phone}}</td>
                     <td>{{date('Y-m-d',strtotime($dt->a_date))}}</td>
                     <td><button onclick="window.location.href = '{{url('/admin/edit-worker/'.$dt->a_id)}}' " class="btn btn-primary">Edit</button></td>
+                    <td><button onclick="window.location.href = '{{url('/admin/view-investors-under/'.$dt->a_id)}}' " class="btn btn-primary">View Investors</button></td>
                 </tr>
             @endforeach
         </tbody>

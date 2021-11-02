@@ -26,9 +26,9 @@
                     <td>{{$dt->i_email}}</td>
                     <td>{{$dt->i_phone}}</td>
                     <td>{{(intval($dt->i_status) == 1) ? 'Active': 'In-Active'}}</td>
-                    <td>{{$dt->code}}</td>
-                    <td>{{date('Y-m-d',strtotime($dt->date))}}</td>
-                    <td><button onclick="window.location.href = '{{url('/admin/edit-category/'.$dt->c_id)}}' " class="btn btn-primary">Edit</button></td>
+                    <td>C{{$dt->a_id}}</td>
+                    <td>{{date('Y-m-d',strtotime($dt->date_updated))}}</td>
+                    <td><button onclick="window.location.href = '{{url('/admin/edit-investor/'.$dt->i_id)}}' " class="btn btn-primary">Edit</button></td>
                 </tr>
             @endforeach
         </tbody>

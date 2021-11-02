@@ -55,6 +55,10 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
         Route::get('/create-investor', 'Investors@create_investor');
         Route::post('/create-investor', 'Investors@create_investor_now');
         Route::get('/view-investors', 'Investors@view_investors');
+        Route::get('/view-investors-under/{a_id}', 'Investors@view_investors_under');
+        Route::get('/edit-investor/{i_id}', 'Investors@edit_investor');
+        Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');
+
 
     });
 
