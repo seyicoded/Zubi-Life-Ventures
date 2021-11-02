@@ -73,6 +73,21 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a class="show-cat-btn" href="##">
+                        <span class="icon folder" aria-hidden="true"></span>Investors
+                        <span class="category__btn transparent-btn" title="Open list">
+                            <span class="sr-only">Open list</span>
+                            <span class="icon arrow-down" aria-hidden="true"></span>
+                        </span>
+                    </a>
+                    <ul class="cat-sub-menu">
+                        <li>
+                            <a href="{{url('/admin/create-investor')}}">Create Investor</a>
+                            <a href="{{url('/admin/view-investors')}}">View Investors</a>
+                        </li>
+                    </ul>
+                </li>
                 {{-- <li>
                     <a class="show-cat-btn" href="##">
                         <span class="icon document" aria-hidden="true"></span>Posts

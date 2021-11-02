@@ -51,6 +51,10 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
         Route::get('/edit-worker/{a_id}', 'Workers@edit_view');
         Route::post('/edit-worker/{a_id}', 'Workers@edit_now');
 
+        // investors aspect
+        Route::get('/create-investor', 'Investors@create_investor');
+        Route::post('/create-investor', 'Investors@create_investor_now');
+
     });
 
 });
