@@ -3,3 +3,5 @@ CREATE TABLE `zubi_venture`.`investors` ( `i_id` INT NOT NULL AUTO_INCREMENT ,  
 ALTER TABLE `investors` CHANGE `i_email` `i_email` VARCHAR(760) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
 
 ALTER TABLE `investors` ADD UNIQUE(`i_email`);
+
+ALTER TABLE `investors`  ADD `code` TEXT NOT NULL  AFTER `i_status`;

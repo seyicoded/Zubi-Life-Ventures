@@ -54,6 +54,7 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
         // investors aspect
         Route::get('/create-investor', 'Investors@create_investor');
         Route::post('/create-investor', 'Investors@create_investor_now');
+        Route::get('/view-investors', 'Investors@view_investors');
 
     });
 
