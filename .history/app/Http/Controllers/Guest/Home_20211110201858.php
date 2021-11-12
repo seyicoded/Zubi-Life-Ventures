@@ -35,7 +35,7 @@ class Home extends Controller
         }
 
         if( intval($db[0]->i_status) != 1 ){
-            return view('guest.signin')->with('error', 'Account has been suspended, Contact Admin for inquiries');
+            return view('guest.signin')->with('error', 'Account has been suspended, Account Admin for inquiries');
         }
 
 
@@ -44,9 +44,5 @@ class Home extends Controller
         setcookie(sha1('is_user_signed_in_zubi_venture'),sha1('truly_signed_in'), (time() + (86400 * 365) ),"/");
         setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),"/");
         setcookie(sha1('user_code_in_zubi_venture'),base64_encode($db[0]->code), (time() + (86400 * 365) ),"/");
-        setcookie(sha1('user_name_in_zubi_venture'),base64_encode($db[0]->i_name), (time() + (86400 * 365) ),"/");
-        setcookie(sha1('user_email_in_zubi_venture'),base64_encode($db[0]->i_email), (time() + (86400 * 365) ),"/");
-
-        return redirect('/');
     }
 }

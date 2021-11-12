@@ -30,7 +30,7 @@
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                 {{-- <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li> --}}
                 {{-- <li><a class="nav-link scrollto" href="#team">Team</a></li> --}}
-                <li class="dropdown"><a href="#"><span>{{base64_decode($_COOKIE[(sha1('user_name_in_zubi_venture'))])}} ({{base64_decode($_COOKIE[(sha1('user_code_in_zubi_venture'))])}}) </span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="#"><span>{{base64_decode($_COOKIE[(sha1('user_name_in_zubi_venture'))])}} </span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                     <li><a href="#">My Investments</a></li>
                     {{-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>

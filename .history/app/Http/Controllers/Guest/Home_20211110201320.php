@@ -31,22 +31,7 @@ class Home extends Controller
 
         $db = DB::select('SELECT * from investors where i_email = ? AND i_password = ?', [strtolower($email), sha1(strtolower($password))]);
         if( count($db) == 0 ){
-            return view('guest.signin')->with('error', 'Account Not Found');
+            return view('guest.signin')->with('error', 'Account Not Found ');
         }
-
-        if( intval($db[0]->i_status) != 1 ){
-            return view('guest.signin')->with('error', 'Account has been suspended, Contact Admin for inquiries');
-        }
-
-
-
-        // store info into cookie then re-direct
-        setcookie(sha1('is_user_signed_in_zubi_venture'),sha1('truly_signed_in'), (time() + (86400 * 365) ),"/");
-        setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),"/");
-        setcookie(sha1('user_code_in_zubi_venture'),base64_encode($db[0]->code), (time() + (86400 * 365) ),"/");
-        setcookie(sha1('user_name_in_zubi_venture'),base64_encode($db[0]->i_name), (time() + (86400 * 365) ),"/");
-        setcookie(sha1('user_email_in_zubi_venture'),base64_encode($db[0]->i_email), (time() + (86400 * 365) ),"/");
-
-        return redirect('/');
     }
 }

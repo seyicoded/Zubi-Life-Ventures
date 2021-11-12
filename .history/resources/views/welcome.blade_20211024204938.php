@@ -7,7 +7,7 @@
 
       <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
         <div class="col-xl-6 col-lg-8">
-          <h1>Zubic Life Link Save And Buy Ventures<span>.</span></h1>
+          <h1>Zubi Life Link Save And Buy Ventures<span>.</span></h1>
           <h2>We are team of professional investors</h2>
         </div>
       </div>

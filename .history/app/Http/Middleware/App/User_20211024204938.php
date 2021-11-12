@@ -17,7 +17,7 @@ class User
     {
         if(!(isset($_COOKIE[sha1('is_user_signed_in_zubi_venture')]))){
             //echo 'a';
-            return redirect(url('sign-in'));
+            return redirect(url('login'));
             // echo '1';
             // return $next($request);
         }

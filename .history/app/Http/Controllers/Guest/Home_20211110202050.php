@@ -46,7 +46,5 @@ class Home extends Controller
         setcookie(sha1('user_code_in_zubi_venture'),base64_encode($db[0]->code), (time() + (86400 * 365) ),"/");
         setcookie(sha1('user_name_in_zubi_venture'),base64_encode($db[0]->i_name), (time() + (86400 * 365) ),"/");
         setcookie(sha1('user_email_in_zubi_venture'),base64_encode($db[0]->i_email), (time() + (86400 * 365) ),"/");
-
-        return redirect('/');
     }
 }

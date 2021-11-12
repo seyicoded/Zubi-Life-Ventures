@@ -70,5 +70,4 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
 Route::group(['namespace'=>'User'], function(){
 
     // bottom side for dynamic category route and it content
-    Route::get('/{route_name}', 'Logic1@view_categories');
 });

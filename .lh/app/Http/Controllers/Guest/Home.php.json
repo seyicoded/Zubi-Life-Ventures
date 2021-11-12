@@ -1,0 +1,70 @@
+{
+    "sourceFile": "app/Http/Controllers/Guest/Home.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1636568945191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636568964107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,7 +14,7 @@\n         return view('welcome')->with('data', ['cat' => $cat]);\n     }\n \n     public function signin(){\n-        return view('welcome');\n+        return view('guest.signin');\n     }\n }\n"
+                },
+                {
+                    "date": 1636570307557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,5 +16,9 @@\n \n     public function signin(){\n         return view('guest.signin');\n     }\n+\n+    public function signin_now(Request $request){\n+\n+    }\n }\n"
+                },
+                {
+                    "date": 1636570338594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,8 @@\n         return view('guest.signin');\n     }\n \n     public function signin_now(Request $request){\n-\n+        $email = $request->email;\n+        $password = $request->password;\n     }\n }\n"
+                },
+                {
+                    "date": 1636570457853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         return view('welcome')->with('data', ['cat' => $cat]);\n     }\n \n     public function signin(){\n-        return view('guest.signin');\n+        return view('guest.signin')->with('error', 'ahh');\n     }\n \n     public function signin_now(Request $request){\n         $email = $request->email;\n"
+                },
+                {
+                    "date": 1636570465545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n         return view('welcome')->with('data', ['cat' => $cat]);\n     }\n \n     public function signin(){\n-        return view('guest.signin')->with('error', 'ahh');\n+        return view('guest.signin');\n     }\n \n     public function signin_now(Request $request){\n         $email = $request->email;\n"
+                },
+                {
+                    "date": 1636570529725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,6 +20,13 @@\n \n     public function signin_now(Request $request){\n         $email = $request->email;\n         $password = $request->password;\n+\n+        if($email == ''){\n+            return view('guest.signin')->with('error', 'E-mail is required');\n+        }\n+        if($password == ''){\n+            return view('guest.signin')->with('error', 'Password is required');\n+        }\n     }\n }\n"
+                },
+                {
+                    "date": 1636571600760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,6 +27,11 @@\n         }\n         if($password == ''){\n             return view('guest.signin')->with('error', 'Password is required');\n         }\n+\n+        $db = DB::select('SELECT * from investors where i_email = ? AND i_password = ?', [strtolower($email), sha1(strtolower($password))]);\n+        if( count($db) == 0 ){\n+            return view('guest.signin')->with('error', 'Account Not Found ');\n+        }\n     }\n }\n"
+                },
+                {
+                    "date": 1636571615513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,8 @@\n         }\n \n         $db = DB::select('SELECT * from investors where i_email = ? AND i_password = ?', [strtolower($email), sha1(strtolower($password))]);\n         if( count($db) == 0 ){\n-            return view('guest.signin')->with('error', 'Account Not Found ');\n+            return view('guest.signin')->with('error', 'Account Not Found');\n         }\n     }\n }\n"
+                },
+                {
+                    "date": 1636571646437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,6 +32,8 @@\n         $db = DB::select('SELECT * from investors where i_email = ? AND i_password = ?', [strtolower($email), sha1(strtolower($password))]);\n         if( count($db) == 0 ){\n             return view('guest.signin')->with('error', 'Account Not Found');\n         }\n+\n+        // store info into cookie then re-direct\n     }\n }\n"
+                },
+                {
+                    "date": 1636571835351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,6 +34,9 @@\n             return view('guest.signin')->with('error', 'Account Not Found');\n         }\n \n         // store info into cookie then re-direct\n+        setcookie(sha1('is_user_signed_in_zubi_venture'),sha1('truly_signed_in'), (time() + (86400 * 365) ),\"/\");\n+        setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),\"/\");\n+        setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),\"/\");\n     }\n }\n"
+                },
+                {
+                    "date": 1636571938264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,10 +33,16 @@\n         if( count($db) == 0 ){\n             return view('guest.signin')->with('error', 'Account Not Found');\n         }\n \n+        if( intval($db[0]->i_status) != 1 ){\n+            return view('guest.signin')->with('error', 'Account has been suspended, Account Admin for inquiries');\n+        }\n+\n+\n+\n         // store info into cookie then re-direct\n         setcookie(sha1('is_user_signed_in_zubi_venture'),sha1('truly_signed_in'), (time() + (86400 * 365) ),\"/\");\n         setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),\"/\");\n-        setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),\"/\");\n+        setcookie(sha1('user_code_in_zubi_venture'),base64_encode($db[0]->code), (time() + (86400 * 365) ),\"/\");\n     }\n }\n"
+                },
+                {
+                    "date": 1636572050662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,15 +34,17 @@\n             return view('guest.signin')->with('error', 'Account Not Found');\n         }\n \n         if( intval($db[0]->i_status) != 1 ){\n-            return view('guest.signin')->with('error', 'Account has been suspended, Account Admin for inquiries');\n+            return view('guest.signin')->with('error', 'Account has been suspended, Contact Admin for inquiries');\n         }\n \n \n \n         // store info into cookie then re-direct\n         setcookie(sha1('is_user_signed_in_zubi_venture'),sha1('truly_signed_in'), (time() + (86400 * 365) ),\"/\");\n         setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),\"/\");\n         setcookie(sha1('user_code_in_zubi_venture'),base64_encode($db[0]->code), (time() + (86400 * 365) ),\"/\");\n+        setcookie(sha1('user_name_in_zubi_venture'),base64_encode($db[0]->i_name), (time() + (86400 * 365) ),\"/\");\n+        setcookie(sha1('user_email_in_zubi_venture'),base64_encode($db[0]->i_email), (time() + (86400 * 365) ),\"/\");\n     }\n }\n"
+                },
+                {
+                    "date": 1636572101301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,6 +45,8 @@\n         setcookie(sha1('user_id_in_zubi_venture'),base64_encode($db[0]->i_id), (time() + (86400 * 365) ),\"/\");\n         setcookie(sha1('user_code_in_zubi_venture'),base64_encode($db[0]->code), (time() + (86400 * 365) ),\"/\");\n         setcookie(sha1('user_name_in_zubi_venture'),base64_encode($db[0]->i_name), (time() + (86400 * 365) ),\"/\");\n         setcookie(sha1('user_email_in_zubi_venture'),base64_encode($db[0]->i_email), (time() + (86400 * 365) ),\"/\");\n+\n+        return redirect('/');\n     }\n }\n"
+                }
+            ],
+            "date": 1636568945191,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Guest;\n\nuse Illuminate\\Http\\Request;\nuse App\\Http\\Controllers\\Controller;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass Home extends Controller\n{\n    //\n    public function home(){\n        $cat = DB::select('SELECT * from category where status = ?', [1]);\n        return view('welcome')->with('data', ['cat' => $cat]);\n    }\n\n    public function signin(){\n        return view('welcome');\n    }\n}\n"
+        }
+    ]
+}

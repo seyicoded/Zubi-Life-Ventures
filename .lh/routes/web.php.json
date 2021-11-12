@@ -1,0 +1,30 @@
+{
+    "sourceFile": "routes/web.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1636568967850,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636570290066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n */\n \n Route::get('/', 'Guest\\Home@home');\n Route::get('/sign-in', 'Guest\\Home@signin');\n+Route::post('/sign-in', 'Guest\\Home@signin_now');\n \n // user aspect\n \n // Admin aspect\n"
+                },
+                {
+                    "date": 1636583324504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -64,4 +64,10 @@\n \n     });\n \n });\n+\n+// user aspect\n+Route::group(['namespace'=>'User'], function(){\n+\n+    // bottom side for dynamic category route and it content\n+});\n"
+                },
+                {
+                    "date": 1636634009719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,5 +69,6 @@\n // user aspect\n Route::group(['namespace'=>'User'], function(){\n \n     // bottom side for dynamic category route and it content\n+    Route::get('/{route_name}', 'Logic1@view_categories');\n });\n"
+                }
+            ],
+            "date": 1636568967850,
+            "name": "Commit-0",
+            "content": "<?php\n\n/*\n|--------------------------------------------------------------------------\n| Web Routes\n|--------------------------------------------------------------------------\n|\n| Here is where you can register web routes for your application. These\n| routes are loaded by the RouteServiceProvider within a group which\n| contains the \"web\" middleware group. Now create something great!\n|\n*/\n\nRoute::get('/', 'Guest\\Home@home');\nRoute::get('/sign-in', 'Guest\\Home@signin');\n\n// user aspect\n\n// Admin aspect\nRoute::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){\n\n    Route::get('/login', function () {\n        return view('admin.signin');\n    });\n    Route::post('/login', 'Auth@login_admin');\n    Route::post('/logout', 'Auth@logout_now');\n\n    Route::group(['middleware'=>'admin_auth'], function(){\n        Route::get('/', function () {\n            return view('admin.home');\n        });\n\n        // category aspect\n        Route::get('/create-category', 'Categories@create_view');\n        Route::post('/create-category', 'Categories@create_now');\n        Route::get('/view-category', 'Categories@view_all');\n        Route::get('/edit-category/{c_id}', 'Categories@edit_view');\n        Route::post('/edit-category/{c_id}', 'Categories@edit_now');\n\n        // package aspect\n        Route::get('/create-package', 'Packages@create_view');\n        Route::post('/create-package', 'Packages@create_now');\n        Route::get('/view-packages', 'Packages@view_packages');\n        Route::get('/edit-package/{p_id}', 'Packages@edit_view');\n        Route::post('/edit-package/{p_id}', 'Packages@edit_now');\n        Route::get('/delete-package-other-image/{po_id}', 'Packages@delete_po_now');\n\n        // workers\n        Route::get('/create-worker', 'Workers@create_worker');\n        Route::post('/create-worker', 'Workers@create_worker_now');\n        Route::get('/view-workers', 'Workers@view_workers');\n        Route::get('/edit-worker/{a_id}', 'Workers@edit_view');\n        Route::post('/edit-worker/{a_id}', 'Workers@edit_now');\n\n        // investors aspect\n        Route::get('/create-investor', 'Investors@create_investor');\n        Route::post('/create-investor', 'Investors@create_investor_now');\n        Route::get('/view-investors', 'Investors@view_investors');\n        Route::get('/view-investors-under/{a_id}', 'Investors@view_investors_under');\n        Route::get('/edit-investor/{i_id}', 'Investors@edit_investor');\n        Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');\n\n\n    });\n\n});\n"
+        }
+    ]
+}

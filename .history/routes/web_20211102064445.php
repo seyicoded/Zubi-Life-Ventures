@@ -12,8 +12,6 @@
 */
 
 Route::get('/', 'Guest\Home@home');
-Route::get('/sign-in', 'Guest\Home@signin');
-Route::post('/sign-in', 'Guest\Home@signin_now');
 
 // user aspect
 
@@ -64,11 +62,4 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
 
     });
 
-});
-
-// user aspect
-Route::group(['namespace'=>'User'], function(){
-
-    // bottom side for dynamic category route and it content
-    Route::get('/{route_name}', 'Logic1@view_categories');
 });
