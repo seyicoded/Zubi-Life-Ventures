@@ -63,7 +63,7 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
 
         Route::get('/view-subscription/{i_id}', 'Investors@view_subscription');
 
-        Route::get('/cancel-subscription', 'Investors@cancel_subscription');
+        Route::get('/cancel-subscription/{tnx_ref}', 'Investors@cancel_subscription');
 
 
 

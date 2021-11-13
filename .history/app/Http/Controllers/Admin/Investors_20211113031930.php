@@ -77,8 +77,7 @@ class Investors extends Controller
         return view('admin.subscription.view')->with('data',['db' => $db]);
     }
 
-    public function cancel_subscription(Request $request){
-        $tnx_ref = $request->tnx_ref;
+    public function cancel_subscription($tnx_ref){
         DB::update('UPDATE investors_packages_linker set status = 3 where tnx_ref = ?', [$tnx_ref]);
         return back();
     }

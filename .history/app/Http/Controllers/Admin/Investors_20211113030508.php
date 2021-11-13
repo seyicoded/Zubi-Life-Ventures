@@ -73,13 +73,6 @@ class Investors extends Controller
     }
 
     public function view_subscription($i_id){
-        $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);
-        return view('admin.subscription.view')->with('data',['db' => $db]);
-    }
 
-    public function cancel_subscription(Request $request){
-        $tnx_ref = $request->tnx_ref;
-        DB::update('UPDATE investors_packages_linker set status = 3 where tnx_ref = ?', [$tnx_ref]);
-        return back();
     }
 }

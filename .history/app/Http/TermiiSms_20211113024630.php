@@ -92,10 +92,7 @@ class TermiiSms{
             if($result->data->status == 'success'){
                 // transaction was successful, perform success logic
                 $duration_paid = intval($data->duration_paid);
-                $duration_paid = $duration_paid + 1;
-                $new_status = ($duration_paid == intval($data->duration_count) ) ? 2:1;
-
-                DB::update('UPDATE investors_packages_linker set duration_paid = ?, status = ? where ip_id = ?', [$duration_paid, $new_status, $ip_id]);
+                $new_duration = $duration_paid + 1;
             }
         }
     }

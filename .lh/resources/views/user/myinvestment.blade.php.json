@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 17,
+            "activePatchIndex": 22,
             "patches": [
                 {
                     "date": 1636764158292,
@@ -76,6 +76,26 @@
                 {
                     "date": 1636765406476,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,9 +59,23 @@\n                             <td>{{$dt->duration_paid}}</td>\n                             <td>{{$dt->amount_to_pay}}</td>\n                             <td>{{$dt->last_four_card_numb}}</td>\n                             <td>{{(intval($dt->status) == 0) ? 'Pending Start Payment': ((intval($dt->status) == 1) ? 'Payment On-going': ((intval($dt->status) == 2) ? 'Completed': 'Aborted'))}}</td>\n-                            <td>{{$dt->last_four_card_numb}}</td>\n+                            <td>\n+                                @switch(intval($dt->status))\n+                                    @case(0)\n+                                        <button type=\"button\" class=\"btn btn-primary\">ReQuery Payment</button>\n+                                        @break\n+\n+                                    @case(1)\n+                                        <button type=\"button\" class=\"btn btn-primary\">Trigger Day AutoPay</button>\n+                                        @break\n+\n+                                    @default\n+                                    <button type=\"button\" class=\"btn btn-primary btn-disabled\" disabled>Not Available</button>\n+\n+                                @endswitch\n+                            </td>\n                         </tr>\n                     @endforeach\n \n                 </tbody>\n"
+                },
+                {
+                    "date": 1636766406067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n                             <td>{{(intval($dt->status) == 0) ? 'Pending Start Payment': ((intval($dt->status) == 1) ? 'Payment On-going': ((intval($dt->status) == 2) ? 'Completed': 'Aborted'))}}</td>\n                             <td>\n                                 @switch(intval($dt->status))\n                                     @case(0)\n-                                        <button type=\"button\" class=\"btn btn-primary\">ReQuery Payment</button>\n+                                        <button type=\"button\" class=\"btn btn-primary\" onclick=\"window.location.href= '{{url('/callback1')}}?trxref={{$dt->tnx_ref}}'\">ReQuery Payment</button>\n                                         @break\n \n                                     @case(1)\n                                         <button type=\"button\" class=\"btn btn-primary\">Trigger Day AutoPay</button>\n"
+                },
+                {
+                    "date": 1636766490929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n     </section><!-- End Breadcrumbs -->\n \n     <section class=\"inner-page\">\n       <div class=\"container\">\n+          <marquee>if payment was sucess and it's hasn't reflected, action would then have a requery button, so click it</marquee>\n         <table class=\"table table-striped table-hover table-inverse\" style=\"width: 100%\">\n             <thead class=\"thead-inverse\">\n                 <tr>\n                     <th>Tnx Ref</th>\n"
+                },
+                {
+                    "date": 1636767252495,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n                                         <button type=\"button\" class=\"btn btn-primary\" onclick=\"window.location.href= '{{url('/callback1')}}?trxref={{$dt->tnx_ref}}'\">ReQuery Payment</button>\n                                         @break\n \n                                     @case(1)\n-                                        <button type=\"button\" class=\"btn btn-primary\">Trigger Day AutoPay</button>\n+                                        <button type=\"button\" class=\"btn btn-primary\" onclick=\"window.location.href= '{{url('/trigger-autocharge')}}?ip_id={{$dt->ip_id}}'\">Trigger Day AutoPay</button>\n                                         @break\n \n                                     @default\n                                     <button type=\"button\" class=\"btn btn-primary btn-disabled\" disabled>Not Available</button>\n"
+                },
+                {
+                    "date": 1636768200581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,10 +42,10 @@\n             <thead class=\"thead-inverse\">\n                 <tr>\n                     <th>Tnx Ref</th>\n                     <th>Package Name</th>\n-                    <th>Duration</th>\n-                    <th>Duration Paid</th>\n+                    <th>Duration (Days)</th>\n+                    <th>Duration Paid (Days)</th>\n                     <th>Cost per Day</th>\n                     <th>Card Last Four Digit</th>\n                     <th>Status</th>\n                     <th>Action</th>\n"
+                },
+                {
+                    "date": 1636768237139,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \n     <section class=\"inner-page\">\n       <div class=\"container\">\n           <marquee>if payment was sucess and it's hasn't reflected, action would then have a requery button, so click it</marquee>\n-        <table class=\"table table-striped table-hover table-inverse\" style=\"width: 100%\">\n+        <table class=\"table table-striped table-hover table-inverse table-responsive\" style=\"width: 100%\">\n             <thead class=\"thead-inverse\">\n                 <tr>\n                     <th>Tnx Ref</th>\n                     <th>Package Name</th>\n"
                 }
             ],
             "date": 1636764158292,

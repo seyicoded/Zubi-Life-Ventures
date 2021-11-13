@@ -61,11 +61,6 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
         Route::get('/edit-investor/{i_id}', 'Investors@edit_investor');
         Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');
 
-        Route::get('/view-subscription/{i_id}', 'Investors@view_subscription');
-
-        Route::get('/cancel-subscription', 'Investors@cancel_subscription');
-
-
 
     });
 

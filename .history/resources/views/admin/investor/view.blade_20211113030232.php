@@ -30,7 +30,7 @@
                     <td>C{{$dt->a_id}}</td>
                     <td>{{date('Y-m-d',strtotime($dt->date_updated))}}</td>
                     <td><button onclick="window.location.href = '{{url('/admin/edit-investor/'.$dt->i_id)}}' " class="btn btn-primary">Edit</button></td>
-                    <td><button onclick="window.location.href = '{{url('/admin/view-subscription/'.$dt->i_id)}}' " class="btn btn-primary">View Subscription</button></td>
+                    <td><button onclick="window.location.href = '{{url('/admin/edit-investor/'.$dt->i_id)}}' " class="btn btn-primary">View Subscription</button></td>
                 </tr>
             @endforeach
         </tbody>

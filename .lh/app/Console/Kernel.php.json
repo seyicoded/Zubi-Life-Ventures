@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/Console/Kernel.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1636766862159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636766885458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,5 +50,9 @@\n         $this->load(__DIR__.'/Commands');\n \n         require base_path('routes/console.php');\n     }\n+\n+    public function charge_every_active_sub(){\n+\n+    }\n }\n"
+                },
+                {
+                    "date": 1636767055499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,10 @@\n namespace App\\Console;\n \n use Illuminate\\Console\\Scheduling\\Schedule;\n use Illuminate\\Foundation\\Console\\Kernel as ConsoleKernel;\n+use App\\Http\\TermiiSms;\n+use Illuminate\\Support\\Facades\\DB;\n \n class Kernel extends ConsoleKernel\n {\n     /**\n@@ -52,7 +54,10 @@\n         require base_path('routes/console.php');\n     }\n \n     public function charge_every_active_sub(){\n+        $active = DB::select('SELECT * from investors_packages_linker where status = ?', [1]);\n+        foreach ($active as $db) {\n \n+        }\n     }\n }\n"
+                },
+                {
+                    "date": 1636767186174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,8 +56,8 @@\n \n     public function charge_every_active_sub(){\n         $active = DB::select('SELECT * from investors_packages_linker where status = ?', [1]);\n         foreach ($active as $db) {\n-\n+            TermiiSms::auto_charge_now_logic($db->ip_id);\n         }\n     }\n }\n"
+                }
+            ],
+            "date": 1636766862159,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Console;\n\nuse Illuminate\\Console\\Scheduling\\Schedule;\nuse Illuminate\\Foundation\\Console\\Kernel as ConsoleKernel;\n\nclass Kernel extends ConsoleKernel\n{\n    /**\n     * The Artisan commands provided by your application.\n     *\n     * @var array\n     */\n    protected $commands = [\n        //\n    ];\n\n    /**\n     * Define the application's command schedule.\n     *\n     * @param  \\Illuminate\\Console\\Scheduling\\Schedule  $schedule\n     * @return void\n     */\n    protected function schedule(Schedule $schedule)\n    {\n        $schedule->call(function(){\n\n            // remember yo change this if it's not nigeria that's timezone\n            date_default_timezone_set('Africa/Lagos');\n            // echo date_default_timezone_get();\n            // echo date('Y-m-d H:i:s');\n\n            // while creating cron, make it charge once a day\n\n            $this::charge_every_active_sub();\n\n        })->everyThirtyMinutes();\n        // $schedule->command('inspire')\n        //          ->hourly();\n    }\n\n    /**\n     * Register the commands for the application.\n     *\n     * @return void\n     */\n    protected function commands()\n    {\n        $this->load(__DIR__.'/Commands');\n\n        require base_path('routes/console.php');\n    }\n}\n"
+        }
+    ]
+}

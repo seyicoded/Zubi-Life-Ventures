@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1636568967850,
@@ -40,6 +40,42 @@
                 {
                     "date": 1636763852210,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n // user aspect\n Route::group(['namespace'=>'User'], function(){\n     Route::get('/subscibe_now', 'Logic1@activate_subscription');\n     Route::get('/callback1', 'Logic1@validate_payment');\n-    Route::get('/my-transaction', 'Logic1@my_transaction');\n+    Route::get('/my-investment', 'Logic1@my_investment');\n \n \n \n     // bottom side for dynamic category route and it content\n"
+                },
+                {
+                    "date": 1636767343646,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,10 +70,12 @@\n Route::group(['namespace'=>'User'], function(){\n     Route::get('/subscibe_now', 'Logic1@activate_subscription');\n     Route::get('/callback1', 'Logic1@validate_payment');\n     Route::get('/my-investment', 'Logic1@my_investment');\n+    Route::get('/trigger-autocharge', 'Logic1@trigger_autocharge');\n \n \n \n+\n     // bottom side for dynamic category route and it content\n     Route::get('/{route_name}', 'Logic1@view_categories');\n });\n"
+                },
+                {
+                    "date": 1636768644482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,8 +71,11 @@\n     Route::get('/subscibe_now', 'Logic1@activate_subscription');\n     Route::get('/callback1', 'Logic1@validate_payment');\n     Route::get('/my-investment', 'Logic1@my_investment');\n     Route::get('/trigger-autocharge', 'Logic1@trigger_autocharge');\n+    Route::get('/logout', function(){\n+       echo 's';\n+    });\n \n \n \n \n"
+                },
+                {
+                    "date": 1636768663252,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,9 @@\n     Route::get('/callback1', 'Logic1@validate_payment');\n     Route::get('/my-investment', 'Logic1@my_investment');\n     Route::get('/trigger-autocharge', 'Logic1@trigger_autocharge');\n     Route::get('/logout', function(){\n-       echo 's';\n+\n     });\n \n \n \n"
+                },
+                {
+                    "date": 1636768763555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,9 +72,13 @@\n     Route::get('/callback1', 'Logic1@validate_payment');\n     Route::get('/my-investment', 'Logic1@my_investment');\n     Route::get('/trigger-autocharge', 'Logic1@trigger_autocharge');\n     Route::get('/logout', function(){\n-\n+        setcookie(sha1('is_user_signed_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n+        setcookie(sha1('user_id_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n+        setcookie(sha1('user_code_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n+        setcookie(sha1('user_name_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n+        setcookie(sha1('user_email_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n     });\n \n \n \n"
+                },
+                {
+                    "date": 1636768782134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,8 +77,10 @@\n         setcookie(sha1('user_id_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n         setcookie(sha1('user_code_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n         setcookie(sha1('user_name_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n         setcookie(sha1('user_email_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),\"/\");\n+\n+        return redirect('/');\n     });\n \n \n \n"
+                },
+                {
+                    "date": 1636769055411,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,9 +60,12 @@\n         Route::get('/view-investors-under/{a_id}', 'Investors@view_investors_under');\n         Route::get('/edit-investor/{i_id}', 'Investors@edit_investor');\n         Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');\n \n+        Route::get('/view-subscription/{i_id}', 'Investors@view_subscription');\n \n+\n+\n     });\n \n });\n \n"
+                },
+                {
+                    "date": 1636769854454,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,10 +62,12 @@\n         Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');\n \n         Route::get('/view-subscription/{i_id}', 'Investors@view_subscription');\n \n+        Route::get('/cancel-subscription/{rnx_ref}', 'Investors@cancel_subscription');\n \n \n+\n     });\n \n });\n \n"
+                },
+                {
+                    "date": 1636769882155,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n         Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');\n \n         Route::get('/view-subscription/{i_id}', 'Investors@view_subscription');\n \n-        Route::get('/cancel-subscription/{rnx_ref}', 'Investors@cancel_subscription');\n+        Route::get('/cancel-subscription/{tnx_ref}', 'Investors@cancel_subscription');\n \n \n \n     });\n"
+                },
+                {
+                    "date": 1636770046828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n         Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');\n \n         Route::get('/view-subscription/{i_id}', 'Investors@view_subscription');\n \n-        Route::get('/cancel-subscription/{tnx_ref}', 'Investors@cancel_subscription');\n+        Route::get('/cancel-subscription', 'Investors@cancel_subscription');\n \n \n \n     });\n"
                 }
             ],
             "date": 1636568967850,

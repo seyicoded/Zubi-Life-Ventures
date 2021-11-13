@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 43,
+            "activePatchIndex": 45,
             "patches": [
                 {
                     "date": 1636634034006,
@@ -180,6 +180,14 @@
                 {
                     "date": 1636765963334,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n             if($result->data->status == 'success'){\n                 // get investor email\n                 // get card info to update record then set status to 1: on-going,\n                 $authorize = $result->data->authorization;\n-                DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n+                DB::update('UPDATE investors_packages_linker set duration_paid = 1, last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n                 [$authorize->last4, $authorize->reusable, $authorize->authorization_code, 1, $trxref]);\n \n                 return redirect('/my-investment');\n             }\n"
+                },
+                {
+                    "date": 1636767375263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,5 +89,9 @@\n         $i_id = $user_data->i_id;\n         $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);\n         return view('user.myinvestment')->with('data', $db);\n     }\n+\n+    public function trigger_autocharge(Request $request){\n+        $ip_id = $request->ip_id;\n+    }\n }\n"
+                },
+                {
+                    "date": 1636767410217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,6 +92,8 @@\n     }\n \n     public function trigger_autocharge(Request $request){\n         $ip_id = $request->ip_id;\n+        TermiiSms::auto_charge_now_logic($ip_id);\n+        return redirect('/my-investment');\n     }\n }\n"
                 }
             ],
             "date": 1636634034006,

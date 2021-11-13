@@ -1,0 +1,30 @@
+{
+    "sourceFile": "app/Http/Controllers/Admin/Investors.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1636769108673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636769321274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,7 +72,8 @@\n         return redirect('admin/view-investors');\n     }\n \n     public function view_subscription($i_id){\n-\n+        $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);\n+        return view('admin.subscription.view')->with('data',['db' => $db]);\n     }\n }\n"
+                },
+                {
+                    "date": 1636769970918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,5 +75,10 @@\n     public function view_subscription($i_id){\n         $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);\n         return view('admin.subscription.view')->with('data',['db' => $db]);\n     }\n+\n+    public function cancel_subscription($tnx_ref){\n+        DB::update('UPDATE investors_packages_linker set status = 3 where tnx_ref = ?', [$tnx_ref]);\n+        return back();\n+    }\n }\n"
+                },
+                {
+                    "date": 1636770068809,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,9 +76,10 @@\n         $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);\n         return view('admin.subscription.view')->with('data',['db' => $db]);\n     }\n \n-    public function cancel_subscription($tnx_ref){\n+    public function cancel_subscription(Request $request){\n+        $tnx_ref = $request->tnx_ref;\n         DB::update('UPDATE investors_packages_linker set status = 3 where tnx_ref = ?', [$tnx_ref]);\n         return back();\n     }\n }\n"
+                }
+            ],
+            "date": 1636769108673,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Admin;\n\nuse Illuminate\\Http\\Request;\nuse App\\Http\\Controllers\\Controller;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass Investors extends Controller\n{\n    //\n    public function create_investor(Request $request){\n        $a_id = base64_decode($_COOKIE[sha1('zn_admin_id')]);\n        return view('admin.investor.create')->with('data',['a_id' => $a_id]);\n    }\n\n    public function create_investor_now(Request $request){\n        $a_id = base64_decode($_COOKIE[sha1('zn_admin_id')]);\n        $name = $request->name;\n        $phone = $request->phone;\n        $email = strtolower($request->email);\n        $password = sha1(strtolower($request->password));\n\n        DB::insert('INSERT into investors (a_id, i_name, i_email, i_password, i_phone, code) values (?, ?, ?, ?, ?, ?)',\n        [$a_id, $name, $email, $password, $phone, strtotime('now')]);\n\n        return redirect('admin/view-investors');\n    }\n\n    public function view_investors(){\n        $a_id = base64_decode($_COOKIE[sha1('zn_admin_id')]);\n        $admin_data = DB::select('SELECT * from admins where a_id = ?', [$a_id])[0];\n        $role = intval($admin_data->role);\n\n        $data = [];\n        if($role == 1){\n            $data = DB::select('SELECT * from investors where i_status = ? ORDER BY i_id DESC', [1]);\n        }else{\n            $data = DB::select('SELECT * from investors where i_status = ? AND a_id = ? ORDER BY i_id DESC', [1, $a_id]);\n        }\n\n        return view('admin.investor.view')->with('data',['a_id' => $a_id, 'data' => $data]);\n    }\n\n    public function view_investors_under($a_id){\n        $data = DB::select('SELECT * from investors where i_status = ? AND a_id = ? ORDER BY i_id DESC', [1, $a_id]);\n        return view('admin.investor.view')->with('data',['a_id' => $a_id, 'data' => $data]);\n    }\n\n    public function edit_investor($i_id){\n        $data = DB::select('SELECT * from investors where i_id = ?', [$i_id])[0];\n        return view('admin.investor.edit')->with('data',['data' => $data]);\n    }\n\n    public function edit_investor_now($i_id, Request $request){\n        $a_id = base64_decode($_COOKIE[sha1('zn_admin_id')]);\n        $name = $request->name;\n        $phone = $request->phone;\n        $email = strtolower($request->email);\n        $password = sha1(strtolower($request->password));\n\n        if($password == ''){\n            // password not sent\n            DB::update('UPDATE investors set i_name = ?, i_email = ?, i_phone = ? where i_id = ?',\n            [$name, $email, $phone, $i_id]);\n        }else{\n            // password sent\n            DB::update('UPDATE investors set i_name = ?, i_email = ?, i_password = ?, i_phone = ? where i_id = ?',\n            [$name, $email, $password, $phone, $i_id]);\n        }\n\n        return redirect('admin/view-investors');\n    }\n\n    public function view_subscription($i_id){\n\n    }\n}\n"
+        }
+    ]
+}

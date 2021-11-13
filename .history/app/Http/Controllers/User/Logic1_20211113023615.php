@@ -93,7 +93,5 @@ class Logic1 extends Controller
 
     public function trigger_autocharge(Request $request){
         $ip_id = $request->ip_id;
-        TermiiSms::auto_charge_now_logic($ip_id);
-        return redirect('/my-investment');
     }
 }

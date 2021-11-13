@@ -61,11 +61,6 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
         Route::get('/edit-investor/{i_id}', 'Investors@edit_investor');
         Route::post('/edit-investor/{i_id}', 'Investors@edit_investor_now');
 
-        Route::get('/view-subscription/{i_id}', 'Investors@view_subscription');
-
-        Route::get('/cancel-subscription', 'Investors@cancel_subscription');
-
-
 
     });
 
@@ -83,8 +78,6 @@ Route::group(['namespace'=>'User'], function(){
         setcookie(sha1('user_code_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),"/");
         setcookie(sha1('user_name_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),"/");
         setcookie(sha1('user_email_in_zubi_venture'),'', (time() - (86400 * 365 * 2) ),"/");
-
-        return redirect('/');
     });
 
 

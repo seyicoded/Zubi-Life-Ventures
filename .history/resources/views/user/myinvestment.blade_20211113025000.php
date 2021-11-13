@@ -38,7 +38,7 @@
     <section class="inner-page">
       <div class="container">
           <marquee>if payment was sucess and it's hasn't reflected, action would then have a requery button, so click it</marquee>
-        <table class="table table-striped table-hover table-inverse table-responsive" style="width: 100%">
+        <table class="table table-striped table-hover table-inverse" style="width: 100%">
             <thead class="thead-inverse">
                 <tr>
                     <th>Tnx Ref</th>

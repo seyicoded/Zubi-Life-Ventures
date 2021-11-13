@@ -56,48 +56,8 @@ class TermiiSms{
         // END PAYMENT PROCESS
     }
 
-    public static function auto_charge_now_logic($ip_id){
-        $data = DB::select('SELECT * from investors_packages_linker where ip_id = ?', [$ip_id])[0];
+    public static auto_charge_now_logic($ip_id){
 
-        // charge card now
-        $amount = $data->amount_to_pay;
-        $amount = TermiiSms::cal($amount);
-        $url = "https://api.paystack.co/transaction/charge_authorization";
-        $fields = [
-            'email' => $data->email,
-            'amount' => $amount."00",
-            "authorization_code" => $data->auth_code
-        ];
-        $fields_string = http_build_query($fields);
-        //open connection
-        $ch = curl_init();
-
-        //set the url, number of POST vars, POST data
-        curl_setopt($ch,CURLOPT_URL, $url);
-        curl_setopt($ch,CURLOPT_POST, true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            "Authorization: Bearer ".env('PAYSTACK_SECRET'),
-            "Cache-Control: no-cache",
-        ));
-
-        //So that curl_exec returns the contents of the cURL; rather than echoing it
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-
-        //execute post
-        $result = curl_exec($ch);
-        $result = json_decode($result);
-
-        if($result->status){
-            if($result->data->status == 'success'){
-                // transaction was successful, perform success logic
-                $duration_paid = intval($data->duration_paid);
-                $duration_paid = $duration_paid + 1;
-                $new_status = ($duration_paid == intval($data->duration_count) ) ? 2:1;
-
-                DB::update('UPDATE investors_packages_linker set duration_paid = ?, status = ? where ip_id = ?', [$duration_paid, $new_status, $ip_id]);
-            }
-        }
     }
 }
 

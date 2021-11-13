@@ -57,7 +57,7 @@ class Kernel extends ConsoleKernel
     public function charge_every_active_sub(){
         $active = DB::select('SELECT * from investors_packages_linker where status = ?', [1]);
         foreach ($active as $db) {
-            TermiiSms::auto_charge_now_logic($db->ip_id);
+
         }
     }
 }

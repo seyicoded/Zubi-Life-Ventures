@@ -1,0 +1,22 @@
+{
+    "sourceFile": "resources/views/admin/investor/view.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1636768952571,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636769006363,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n                     <td>{{(intval($dt->i_status) == 1) ? 'Active': 'In-Active'}}</td>\n                     <td>C{{$dt->a_id}}</td>\n                     <td>{{date('Y-m-d',strtotime($dt->date_updated))}}</td>\n                     <td><button onclick=\"window.location.href = '{{url('/admin/edit-investor/'.$dt->i_id)}}' \" class=\"btn btn-primary\">Edit</button></td>\n-                    <td><button onclick=\"window.location.href = '{{url('/admin/edit-investor/'.$dt->i_id)}}' \" class=\"btn btn-primary\">View Subscription</button></td>\n+                    <td><button onclick=\"window.location.href = '{{url('/admin/view-subscription/'.$dt->i_id)}}' \" class=\"btn btn-primary\">View Subscription</button></td>\n                 </tr>\n             @endforeach\n         </tbody>\n     </table>\n"
+                }
+            ],
+            "date": 1636768952571,
+            "name": "Commit-0",
+            "content": "@extends('admin.layout.app')\n@section('content')\n<div class=\"w3-container\">\n    <h1 class=\"w3-hover-text-blue w3-center\" style=\"font-weight: bold\">View Investors</h1>\n\n    <table class=\"w3-table w3-bordered w3-striped w3-border w3-hoverable\" id=\"table\">\n        <thead>\n            <tr>\n                <th>SN</th>\n                <th>Code</th>\n                <th>Name</th>\n                <th>Email</th>\n                <th>Phone</th>\n                <th>Status</th>\n                <th>Group</th>\n                <th>Date</th>\n                <th>Action</th>\n                <th>Action</th>\n            </tr>\n        </thead>\n        <tbody>\n            @foreach ($data['data'] as $dt)\n                <tr>\n                    <td>{{$dt->i_id}}</td>\n                    <td>{{$dt->code}}</td>\n                    <td>{{$dt->i_name}}</td>\n                    <td>{{$dt->i_email}}</td>\n                    <td>{{$dt->i_phone}}</td>\n                    <td>{{(intval($dt->i_status) == 1) ? 'Active': 'In-Active'}}</td>\n                    <td>C{{$dt->a_id}}</td>\n                    <td>{{date('Y-m-d',strtotime($dt->date_updated))}}</td>\n                    <td><button onclick=\"window.location.href = '{{url('/admin/edit-investor/'.$dt->i_id)}}' \" class=\"btn btn-primary\">Edit</button></td>\n                    <td><button onclick=\"window.location.href = '{{url('/admin/edit-investor/'.$dt->i_id)}}' \" class=\"btn btn-primary\">View Subscription</button></td>\n                </tr>\n            @endforeach\n        </tbody>\n    </table>\n</div>\n@endsection\n"
+        }
+    ]
+}

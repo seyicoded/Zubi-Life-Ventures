@@ -43,8 +43,8 @@
                     </ul>
                     </li> --}}
                     {{-- <li><a href="#">Card Management</a></li> --}}
-                    <li><a onclick="alert('to make request for any uncompleted withdraw, contact admin')">Withdrawals</a></li>
-                    <li><a href="{{url('logout')}}">Logout</a></li>
+                    <li><a href="#">Withdrawals</a></li>
+                    <li><a href="#">Logout</a></li>
                 </ul>
                 </li>
             </ul>
