@@ -17,8 +17,6 @@
             }else{
                 $amount = $amount + $onefivepercent;
             }
-
-            return $amount;
         }
 
         public static function initial_pay($email, $amount, $tnx_ref){

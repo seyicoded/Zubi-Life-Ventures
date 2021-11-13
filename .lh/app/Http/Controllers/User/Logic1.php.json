@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 14,
+            "activePatchIndex": 43,
             "patches": [
                 {
                     "date": 1636634034006,
@@ -64,6 +64,122 @@
                 {
                     "date": 1636756642447,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,8 @@\n         if(count($cat_) == 0){\n             return response('', 404);\n         }\n         $cat_dt = $cat_[0];\n-        $packages = DB::select('SELECT * from packages where c_id = ?', [$cat_dt->c_id]);\n+        $packages = DB::select('SELECT * from packages where c_id = ? AND status = 1', [$cat_dt->c_id]);\n         return view('user.category')->with('data', ['cat' => $cat_dt, 'packages' => $packages]);\n     }\n }\n"
+                },
+                {
+                    "date": 1636759811041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,5 +18,9 @@\n         $cat_dt = $cat_[0];\n         $packages = DB::select('SELECT * from packages where c_id = ? AND status = 1', [$cat_dt->c_id]);\n         return view('user.category')->with('data', ['cat' => $cat_dt, 'packages' => $packages]);\n     }\n+\n+    public function activate_subscription(Request $request){\n+        $p_id = $request->p_id;\n+    }\n }\n"
+                },
+                {
+                    "date": 1636760060804,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,10 @@\n \n use Illuminate\\Http\\Request;\n use App\\Http\\Controllers\\Controller;\n use Illuminate\\Support\\Facades\\DB;\n+use App\\Http\\TermiiSms;\n+use App\\Http\\TermiiSms\\TermiiSms as TermiiSmsTermiiSms;\n \n class Logic1 extends Controller\n {\n     public function view_categories($route_name){\n@@ -21,6 +23,7 @@\n     }\n \n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n+        $user_data = TermiiSmsTermiiSms::getUser();\n     }\n }\n"
+                },
+                {
+                    "date": 1636760246459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,8 @@\n \n use Illuminate\\Http\\Request;\n use App\\Http\\Controllers\\Controller;\n use Illuminate\\Support\\Facades\\DB;\n-use App\\Http\\TermiiSms;\n use App\\Http\\TermiiSms\\TermiiSms as TermiiSmsTermiiSms;\n \n class Logic1 extends Controller\n {\n"
+                },
+                {
+                    "date": 1636760297596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,6 +23,8 @@\n \n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n         $user_data = TermiiSmsTermiiSms::getUser();\n+\n+        die($user_data);\n     }\n }\n"
+                },
+                {
+                    "date": 1636760318934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n use Illuminate\\Http\\Request;\n use App\\Http\\Controllers\\Controller;\n use Illuminate\\Support\\Facades\\DB;\n-use App\\Http\\TermiiSms\\TermiiSms as TermiiSmsTermiiSms;\n+use App\\Http\\TermiiSms as TermiiSmsTermiiSms;\n \n class Logic1 extends Controller\n {\n     public function view_categories($route_name){\n"
+                },
+                {
+                    "date": 1636760337836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n use Illuminate\\Http\\Request;\n use App\\Http\\Controllers\\Controller;\n use Illuminate\\Support\\Facades\\DB;\n-use App\\Http\\TermiiSms as TermiiSmsTermiiSms;\n+use App\\Http\\TermiiSms;\n \n class Logic1 extends Controller\n {\n     public function view_categories($route_name){\n@@ -22,9 +22,9 @@\n     }\n \n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n-        $user_data = TermiiSmsTermiiSms::getUser();\n+        $user_data = TermiiSms::getUser();\n \n         die($user_data);\n     }\n }\n"
+                },
+                {
+                    "date": 1636760435467,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,7 +24,7 @@\n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n         $user_data = TermiiSms::getUser();\n \n-        die($user_data);\n+        print_r($user_data);\n     }\n }\n"
+                },
+                {
+                    "date": 1636760472203,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,8 @@\n \n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n         $user_data = TermiiSms::getUser();\n-\n-        print_r($user_data);\n+        $i_id = $user_data->i_id;\n+        echo $i_id;\n     }\n }\n"
+                },
+                {
+                    "date": 1636760483075,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,7 +24,8 @@\n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n         $user_data = TermiiSms::getUser();\n         $i_id = $user_data->i_id;\n-        echo $i_id;\n+\n+\n     }\n }\n"
+                },
+                {
+                    "date": 1636760734192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,7 +25,8 @@\n         $p_id = $request->p_id;\n         $user_data = TermiiSms::getUser();\n         $i_id = $user_data->i_id;\n \n+        $tnx_ref = strtotime('now').rand(0, 10).rand(0, 10);\n \n     }\n }\n"
+                },
+                {
+                    "date": 1636760829192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,10 @@\n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n         $user_data = TermiiSms::getUser();\n         $i_id = $user_data->i_id;\n-\n         $tnx_ref = strtotime('now').rand(0, 10).rand(0, 10);\n+        // get package info\n+        $p_data = DB::select('SELECT * from packages where p_id = ?', [$p_id])[0];\n \n     }\n }\n"
+                },
+                {
+                    "date": 1636760999054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,7 +27,10 @@\n         $i_id = $user_data->i_id;\n         $tnx_ref = strtotime('now').rand(0, 10).rand(0, 10);\n         // get package info\n         $p_data = DB::select('SELECT * from packages where p_id = ?', [$p_id])[0];\n-\n+        // try to get link for payment\n+        $email = $user_data->i_email;\n+        $amount = $p_data->amount_one;\n+        $paystack_returned = TermiiSms::initial_pay($email, $amount, $tnx_ref);\n     }\n }\n"
+                },
+                {
+                    "date": 1636761364048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     public function activate_subscription(Request $request){\n         $p_id = $request->p_id;\n         $user_data = TermiiSms::getUser();\n         $i_id = $user_data->i_id;\n-        $tnx_ref = strtotime('now').rand(0, 10).rand(0, 10);\n+        $tnx_ref = strtotime('now').'-'.rand(0, 10).rand(0, 10);\n         // get package info\n         $p_data = DB::select('SELECT * from packages where p_id = ?', [$p_id])[0];\n         // try to get link for payment\n         $email = $user_data->i_email;\n"
+                },
+                {
+                    "date": 1636761922747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,6 +31,19 @@\n         // try to get link for payment\n         $email = $user_data->i_email;\n         $amount = $p_data->amount_one;\n         $paystack_returned = TermiiSms::initial_pay($email, $amount, $tnx_ref);\n+        if(!($paystack_returned->status)){\n+            die($paystack_returned->message);\n+        }\n+\n+        $url_to_pay = $paystack_returned->data->authorization_url;\n+\n+        // store info in database\n+        if( !(DB::insert('INSERT into investors_packages_linker (i_id, p_id, duration_count, tnx_ref, amount_to_pay)\n+        values (?, ?, ?, ?, ?)', [$i_id, $p_id, $p_data->duration, $tnx_ref, $p_data->amount_one])) ){\n+            die('an error occurred');\n+        }\n+        // return url\n+        return redirect($url_to_pay);\n     }\n }\n"
+                },
+                {
+                    "date": 1636762796595,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,5 +45,30 @@\n         }\n         // return url\n         return redirect($url_to_pay);\n     }\n+\n+    public function validate_payment(Request $request){\n+        $trxref = $request->trxref;\n+\n+        $curl = curl_init();\n+        curl_setopt_array($curl, array(\n+            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/:reference\",\n+            CURLOPT_RETURNTRANSFER => true,\n+            CURLOPT_ENCODING => \"\",\n+            CURLOPT_MAXREDIRS => 10,\n+            CURLOPT_TIMEOUT => 30,\n+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n+            CURLOPT_CUSTOMREQUEST => \"GET\",\n+            CURLOPT_HTTPHEADER => array(\n+            \"Authorization: Bearer \".env('PAYSTACK_SECRET'),\n+            \"Cache-Control: no-cache\",\n+            ),\n+        ));\n+\n+        $result = curl_exec($curl);\n+        $result = json_decode($result);\n+        // return $result->status;\n+\n+        return $result;\n+    }\n }\n"
+                },
+                {
+                    "date": 1636762847085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n         $trxref = $request->trxref;\n \n         $curl = curl_init();\n         curl_setopt_array($curl, array(\n-            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/:reference\",\n+            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/:$trxref\",\n             CURLOPT_RETURNTRANSFER => true,\n             CURLOPT_ENCODING => \"\",\n             CURLOPT_MAXREDIRS => 10,\n             CURLOPT_TIMEOUT => 30,\n"
+                },
+                {
+                    "date": 1636762853443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n         $trxref = $request->trxref;\n \n         $curl = curl_init();\n         curl_setopt_array($curl, array(\n-            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/:$trxref\",\n+            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/$trxref\",\n             CURLOPT_RETURNTRANSFER => true,\n             CURLOPT_ENCODING => \"\",\n             CURLOPT_MAXREDIRS => 10,\n             CURLOPT_TIMEOUT => 30,\n"
+                },
+                {
+                    "date": 1636762862201,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n         $trxref = $request->trxref;\n \n         $curl = curl_init();\n         curl_setopt_array($curl, array(\n-            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/$trxref\",\n+            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/:$trxref\",\n             CURLOPT_RETURNTRANSFER => true,\n             CURLOPT_ENCODING => \"\",\n             CURLOPT_MAXREDIRS => 10,\n             CURLOPT_TIMEOUT => 30,\n"
+                },
+                {
+                    "date": 1636762891768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,7 +68,7 @@\n         $result = curl_exec($curl);\n         $result = json_decode($result);\n         // return $result->status;\n \n-        return $result;\n+        print_r($result)\n     }\n }\n"
+                },
+                {
+                    "date": 1636762903379,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n         $trxref = $request->trxref;\n \n         $curl = curl_init();\n         curl_setopt_array($curl, array(\n-            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/:$trxref\",\n+            CURLOPT_URL => \"https://api.paystack.co/transaction/verify/$trxref\",\n             CURLOPT_RETURNTRANSFER => true,\n             CURLOPT_ENCODING => \"\",\n             CURLOPT_MAXREDIRS => 10,\n             CURLOPT_TIMEOUT => 30,\n@@ -68,7 +68,7 @@\n         $result = curl_exec($curl);\n         $result = json_decode($result);\n         // return $result->status;\n \n-        print_r($result)\n+        print_r($result);\n     }\n }\n"
+                },
+                {
+                    "date": 1636763603948,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,7 +68,16 @@\n         $result = curl_exec($curl);\n         $result = json_decode($result);\n         // return $result->status;\n \n-        print_r($result);\n+        if($result->status){\n+            if($result->data->status == 'success'){\n+                // get card info to update record then set status to 1: on-going,\n+                $authorize = $result->data->authorization;\n+                DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, email = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n+                [$authorize->last4, '', $authorize->reusable, $authorize->authorization_code, 1, $trxref]);\n+            }\n+        }else{\n+            die($result->message);\n+        }\n     }\n }\n"
+                },
+                {
+                    "date": 1636763651002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,12 +70,13 @@\n         // return $result->status;\n \n         if($result->status){\n             if($result->data->status == 'success'){\n+                // get investor email\n                 // get card info to update record then set status to 1: on-going,\n                 $authorize = $result->data->authorization;\n-                DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, email = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n-                [$authorize->last4, '', $authorize->reusable, $authorize->authorization_code, 1, $trxref]);\n+                DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n+                [$authorize->last4, $authorize->reusable, $authorize->authorization_code, 1, $trxref]);\n             }\n         }else{\n             die($result->message);\n         }\n"
+                },
+                {
+                    "date": 1636763683447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,10 +38,10 @@\n \n         $url_to_pay = $paystack_returned->data->authorization_url;\n \n         // store info in database\n-        if( !(DB::insert('INSERT into investors_packages_linker (i_id, p_id, duration_count, tnx_ref, amount_to_pay)\n-        values (?, ?, ?, ?, ?)', [$i_id, $p_id, $p_data->duration, $tnx_ref, $p_data->amount_one])) ){\n+        if( !(DB::insert('INSERT into investors_packages_linker (i_id, p_id, duration_count, tnx_ref, amount_to_pay, email)\n+        values (?, ?, ?, ?, ?, ?)', [$i_id, $p_id, $p_data->duration, $tnx_ref, $p_data->amount_one, $email])) ){\n             die('an error occurred');\n         }\n         // return url\n         return redirect($url_to_pay);\n"
+                },
+                {
+                    "date": 1636763733485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -75,8 +75,10 @@\n                 // get card info to update record then set status to 1: on-going,\n                 $authorize = $result->data->authorization;\n                 DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n                 [$authorize->last4, $authorize->reusable, $authorize->authorization_code, 1, $trxref]);\n+\n+                return redirect('/my-transaction');\n             }\n         }else{\n             die($result->message);\n         }\n"
+                },
+                {
+                    "date": 1636763783829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,5 +82,9 @@\n         }else{\n             die($result->message);\n         }\n     }\n+\n+    public function my_transaction(){\n+\n+    }\n }\n"
+                },
+                {
+                    "date": 1636763860140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -76,15 +76,15 @@\n                 $authorize = $result->data->authorization;\n                 DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n                 [$authorize->last4, $authorize->reusable, $authorize->authorization_code, 1, $trxref]);\n \n-                return redirect('/my-transaction');\n+                return redirect('/my-investment');\n             }\n         }else{\n             die($result->message);\n         }\n     }\n \n-    public function my_transaction(){\n+    public function my_investment(){\n \n     }\n }\n"
+                },
+                {
+                    "date": 1636764027106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,7 +84,10 @@\n         }\n     }\n \n     public function my_investment(){\n+        $user_data = TermiiSms::getUser();\n+        $i_id = $user_data->i_id;\n+        $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);\n \n     }\n }\n"
+                },
+                {
+                    "date": 1636764087662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,7 +87,7 @@\n     public function my_investment(){\n         $user_data = TermiiSms::getUser();\n         $i_id = $user_data->i_id;\n         $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);\n-\n+        return view('user.myinvestment')->with('data', $db);\n     }\n }\n"
+                },
+                {
+                    "date": 1636765963334,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,9 +73,9 @@\n             if($result->data->status == 'success'){\n                 // get investor email\n                 // get card info to update record then set status to 1: on-going,\n                 $authorize = $result->data->authorization;\n-                DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n+                DB::update('UPDATE investors_packages_linker set duration_paid = 1, last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',\n                 [$authorize->last4, $authorize->reusable, $authorize->authorization_code, 1, $trxref]);\n \n                 return redirect('/my-investment');\n             }\n"
                 }
             ],
             "date": 1636634034006,

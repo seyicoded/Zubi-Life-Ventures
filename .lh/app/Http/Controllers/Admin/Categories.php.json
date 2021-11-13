@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Http/Controllers/Admin/Categories.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1636760415331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1636760415331,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Admin;\n\nuse Illuminate\\Http\\Request;\nuse App\\Http\\Controllers\\Controller;\nuse App\\Http\\TermiiSms;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass Categories extends Controller\n{\n    //\n    public function create_view(){\n        return view('admin.category.create');\n    }\n\n    public function create_now(Request $request){\n        $cat_name = $request->cat_name;\n        $route_name = $request->route_name;\n        $icon_name = $request->icon_name;\n        $mini_desc = $request->mini_desc;\n        $file = $request->image;\n\n        try {\n            // move logic\n            $image_fileName = time().\".\".$file->extension();\n\n            if( !($file->move(public_path('auto_images/category'),$image_fileName)) ){\n                //error\n                return response()->json(['status'=>0, 'message'=>'error uploading image'],200);\n            }\n\n            // insert into db\n            DB::insert('INSERT into category (route_name, category_name, icon_name, mini_desc, main_image) values (?, ?, ?, ?, ?)',\n            [$route_name, $cat_name, $icon_name, $mini_desc, $image_fileName]);\n        } catch (\\Throwable $th) {\n            //throw $th;\n        }\n\n        return redirect('admin/view-category');\n    }\n\n    public function view_all(){\n        $db = DB::select('SELECT * from category ORDER BY c_id DESC', []);\n        return view('admin.category.view')->with('data', ['data'=> $db]);\n    }\n\n    public function edit_view($c_id){\n        $db = DB::select('SELECT * from category WHERE c_id = ? ORDER BY c_id DESC', [$c_id])[0];\n        return view('admin.category.edit')->with('data', ['data'=> $db]);\n    }\n    public function edit_now($c_id, Request $request){\n        $cat_name = $request->cat_name;\n        $route_name = $request->route_name;\n        $icon_name = $request->icon_name;\n        $mini_desc = $request->mini_desc;\n        $file = $request->image;\n\n        if($file == ''){\n            // no image updating\n            DB::update('UPDATE category set route_name = ?, category_name = ?, icon_name = ?, mini_desc = ? where c_id = ?',\n            [$route_name, $cat_name, $icon_name, $mini_desc, $c_id]);\n        }else{\n            // image updating\n            // move logic\n            $image_fileName = time().\".\".$file->extension();\n\n            if( !($file->move(public_path('auto_images/category'),$image_fileName)) ){\n                //error\n                return response()->json(['status'=>0, 'message'=>'error uploading image'],200);\n            }\n\n            DB::update('UPDATE category set route_name = ?, category_name = ?, icon_name = ?, mini_desc = ?, main_image = ? where c_id = ?',\n            [$route_name, $cat_name, $icon_name, $mini_desc, $image_fileName, $c_id]);\n\n        }\n\n        return redirect('/admin/view-category');\n    }\n}\n"
+        }
+    ]
+}

@@ -74,7 +74,7 @@ class Logic1 extends Controller
                 // get investor email
                 // get card info to update record then set status to 1: on-going,
                 $authorize = $result->data->authorization;
-                DB::update('UPDATE investors_packages_linker set duration_paid = 1, last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',
+                DB::update('UPDATE investors_packages_linker set last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',
                 [$authorize->last4, $authorize->reusable, $authorize->authorization_code, 1, $trxref]);
 
                 return redirect('/my-investment');

@@ -1,0 +1,54 @@
+{
+    "sourceFile": "app/Http/TermiiSms.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1636760012465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636760191248,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <?php\n     namespace App\\Http\\TermiiSms;\n \n     class TermiiSms{\n-        public static function getAdmin(){\n-\n+        public static function getUser(){\n+            $id = base64_decode($_COOKIE[(sha1('user_id_in_zubi_venture'))]);\n         }\n     }\n ?>\n"
+                },
+                {
+                    "date": 1636760283395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,12 @@\n <?php\n     namespace App\\Http\\TermiiSms;\n \n+    use Illuminate\\Support\\Facades\\DB;\n+\n     class TermiiSms{\n         public static function getUser(){\n             $id = base64_decode($_COOKIE[(sha1('user_id_in_zubi_venture'))]);\n+            return (DB::select('SELECT * from investors where i_id = ?', [$id]))[0];\n         }\n     }\n ?>\n"
+                },
+                {
+                    "date": 1636760369029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,5 +8,5 @@\n             $id = base64_decode($_COOKIE[(sha1('user_id_in_zubi_venture'))]);\n             return (DB::select('SELECT * from investors where i_id = ?', [$id]))[0];\n         }\n     }\n-?>\n+\n"
+                },
+                {
+                    "date": 1636760413953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <?php\n-    namespace App\\Http\\TermiiSms;\n+    namespace App\\Http;\n \n     use Illuminate\\Support\\Facades\\DB;\n \n     class TermiiSms{\n"
+                },
+                {
+                    "date": 1636760993342,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,6 +7,10 @@\n         public static function getUser(){\n             $id = base64_decode($_COOKIE[(sha1('user_id_in_zubi_venture'))]);\n             return (DB::select('SELECT * from investors where i_id = ?', [$id]))[0];\n         }\n+\n+        public static function initial_pay($email, $amount, $tnx_ref){\n+\n+        }\n     }\n \n"
+                },
+                {
+                    "date": 1636761436121,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,37 @@\n             return (DB::select('SELECT * from investors where i_id = ?', [$id]))[0];\n         }\n \n         public static function initial_pay($email, $amount, $tnx_ref){\n+            // START PAYMENT PROCESS\n+            $url = \"https://api.paystack.co/transaction/initialize\";\n+            $fields = [\n+                'email' => $email,\n+                'amount' => $amount.\"00\",\n+                'reference' => $tnx_ref\n+            ];\n+            $fields_string = http_build_query($fields);\n+            //open connection\n+            $ch = curl_init();\n \n+            //set the url, number of POST vars, POST data\n+            curl_setopt($ch,CURLOPT_URL, $url);\n+            curl_setopt($ch,CURLOPT_POST, true);\n+            curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);\n+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(\n+                \"Authorization: Bearer \".env('PAYSTACK_SECRET'),\n+                \"Cache-Control: no-cache\",\n+            ));\n+\n+            //So that curl_exec returns the contents of the cURL; rather than echoing it\n+            curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);\n+\n+            //execute post\n+            $result = curl_exec($ch);\n+            $result = json_decode($result);\n+            // return $result->status;\n+\n+            return $result;\n+            // END PAYMENT PROCESS\n         }\n     }\n \n"
+                },
+                {
+                    "date": 1636762012852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,10 @@\n             $url = \"https://api.paystack.co/transaction/initialize\";\n             $fields = [\n                 'email' => $email,\n                 'amount' => $amount.\"00\",\n-                'reference' => $tnx_ref\n+                'reference' => $tnx_ref,\n+                'callback_url' => url('callback1')\n             ];\n             $fields_string = http_build_query($fields);\n             //open connection\n             $ch = curl_init();\n"
+                },
+                {
+                    "date": 1636762327941,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,20 @@\n             $id = base64_decode($_COOKIE[(sha1('user_id_in_zubi_venture'))]);\n             return (DB::select('SELECT * from investors where i_id = ?', [$id]))[0];\n         }\n \n+        public static function cal($amount){\n+            $amount = intval($amount);\n+            $onefivepercent = (($amount) * 1.5) / 100;\n+            if($amount >1499){\n+                $amount = $amount + $onefivepercent + 100;\n+            }else{\n+                $amount = $amount + $onefivepercent;\n+            }\n+        }\n+\n         public static function initial_pay($email, $amount, $tnx_ref){\n+            $amount = TermiiSms::cal($amount);\n             // START PAYMENT PROCESS\n             $url = \"https://api.paystack.co/transaction/initialize\";\n             $fields = [\n                 'email' => $email,\n"
+                },
+                {
+                    "date": 1636762347764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,10 @@\n                 $amount = $amount + $onefivepercent + 100;\n             }else{\n                 $amount = $amount + $onefivepercent;\n             }\n+\n+            return $amount;\n         }\n \n         public static function initial_pay($email, $amount, $tnx_ref){\n             $amount = TermiiSms::cal($amount);\n"
+                }
+            ],
+            "date": 1636760012465,
+            "name": "Commit-0",
+            "content": "<?php\n    namespace App\\Http\\TermiiSms;\n\n    class TermiiSms{\n        public static function getAdmin(){\n\n        }\n    }\n?>\n"
+        }
+    ]
+}

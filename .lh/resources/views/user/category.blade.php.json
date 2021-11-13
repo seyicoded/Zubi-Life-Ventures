@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 65,
+            "activePatchIndex": 72,
             "patches": [
                 {
                     "date": 1636639227268,
@@ -268,6 +268,34 @@
                 {
                     "date": 1636757664162,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,8 +87,9 @@\n                                 <h3 class=\"w3-center\">INVESTMENT PACKAGE: <span style=\"font-weight: bold\">{{$dt->p_name}}</span></h3><br />\n                                 <small style=\"margin-top: 15px\">DESCRIPTION: <span style=\"font-weight: bold\">{{$dt->p_desc}}</span></small> <br />\n                                 <small style=\"margin-top: 15px\">DURATION: <span style=\"font-weight: bold\">{{$dt->duration}} days</span></small> <br />\n                                 <small style=\"margin-top: 15px\">AMOUNT: <span style=\"font-weight: bold\">{{$dt->currency.number_format($dt->amount_one)}} per day</span></small><br />\n+                                <marquee>note: card used for this package would be charged with daily amount until investment is completed</marquee>\n                             </div>\n \n                             <div style=\"display: flex; flex-direction: column; flex: 1\">\n                                 <button type=\"button\" name=\"\" id=\"\" class=\"btn btn-primary btn-lg btn-block\">INVEST NOW</button>\n"
+                },
+                {
+                    "date": 1636759399828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,13 @@\n \n     </div>\n   </section><!-- End Hero -->\n \n+  <script>\n+      function subscribe(p_id){\n+\n+      }\n+  </script>\n   <main id=\"main\">\n \n     <!-- ======= Breadcrumbs ======= -->\n     <section class=\"breadcrumbs\">\n@@ -91,9 +96,9 @@\n                                 <marquee>note: card used for this package would be charged with daily amount until investment is completed</marquee>\n                             </div>\n \n                             <div style=\"display: flex; flex-direction: column; flex: 1\">\n-                                <button type=\"button\" name=\"\" id=\"\" class=\"btn btn-primary btn-lg btn-block\">INVEST NOW</button>\n+                                <button type=\"button\" name=\"\" id=\"\" class=\"btn btn-primary btn-lg btn-block\" onclick=\"subscribe('{{$dt->p_id}}')\">INVEST NOW</button>\n                             </div>\n \n                           </div>\n                           {{-- content --}}\n"
+                },
+                {
+                    "date": 1636759426842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,11 @@\n   </section><!-- End Hero -->\n \n   <script>\n       function subscribe(p_id){\n+          if( confirm('a') ){\n \n+          }\n       }\n   </script>\n   <main id=\"main\">\n \n"
+                },
+                {
+                    "date": 1636759537412,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   </section><!-- End Hero -->\n \n   <script>\n       function subscribe(p_id){\n-          if( confirm('a') ){\n+          if( confirm(\"If you've subscribed for this before by clicking it and want to do a payment, click cancel and navigate to my investment, else click okay\") ){\n \n           }\n       }\n   </script>\n"
+                },
+                {
+                    "date": 1636759553516,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   </section><!-- End Hero -->\n \n   <script>\n       function subscribe(p_id){\n-          if( confirm(\"If you've subscribed for this before by clicking it and want to do a payment, click cancel and navigate to my investment, else click okay\") ){\n+          if( confirm(\"If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay\") ){\n \n           }\n       }\n   </script>\n"
+                },
+                {
+                    "date": 1636759618844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n   <script>\n       function subscribe(p_id){\n           if( confirm(\"If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay\") ){\n-\n+              window.location.href = '{{url('/subscibe_now')}}?p_id='.p_id;\n           }\n       }\n   </script>\n   <main id=\"main\">\n"
+                },
+                {
+                    "date": 1636759649746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n   <script>\n       function subscribe(p_id){\n           if( confirm(\"If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay\") ){\n-              window.location.href = '{{url('/subscibe_now')}}?p_id='.p_id;\n+              window.location.href = '{{url('subscibe_now')}}?p_id='.p_id;\n           }\n       }\n   </script>\n   <main id=\"main\">\n"
+                },
+                {
+                    "date": 1636759693246,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \n   <script>\n       function subscribe(p_id){\n           if( confirm(\"If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay\") ){\n-              window.location.href = '{{url('subscibe_now')}}?p_id='.p_id;\n+              window.location.href = \"{{url('subscibe_now')}}?p_id=\"+p_id;\n           }\n       }\n   </script>\n   <main id=\"main\">\n"
                 }
             ],
             "date": 1636639227268,

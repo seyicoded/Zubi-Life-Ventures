@@ -70,8 +70,6 @@ Route::group(['namespace'=>'Admin', 'prefix' => 'admin'], function(){
 Route::group(['namespace'=>'User'], function(){
     Route::get('/subscibe_now', 'Logic1@activate_subscription');
     Route::get('/callback1', 'Logic1@validate_payment');
-    Route::get('/my-investment', 'Logic1@my_investment');
-
 
 
     // bottom side for dynamic category route and it content

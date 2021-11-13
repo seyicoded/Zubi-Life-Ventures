@@ -39,8 +39,8 @@ class Logic1 extends Controller
         $url_to_pay = $paystack_returned->data->authorization_url;
 
         // store info in database
-        if( !(DB::insert('INSERT into investors_packages_linker (i_id, p_id, duration_count, tnx_ref, amount_to_pay, email)
-        values (?, ?, ?, ?, ?, ?)', [$i_id, $p_id, $p_data->duration, $tnx_ref, $p_data->amount_one, $email])) ){
+        if( !(DB::insert('INSERT into investors_packages_linker (i_id, p_id, duration_count, tnx_ref, amount_to_pay)
+        values (?, ?, ?, ?, ?)', [$i_id, $p_id, $p_data->duration, $tnx_ref, $p_data->amount_one])) ){
             die('an error occurred');
         }
         // return url
@@ -52,7 +52,7 @@ class Logic1 extends Controller
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.paystack.co/transaction/verify/$trxref",
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/:$trxref",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -69,25 +69,6 @@ class Logic1 extends Controller
         $result = json_decode($result);
         // return $result->status;
 
-        if($result->status){
-            if($result->data->status == 'success'){
-                // get investor email
-                // get card info to update record then set status to 1: on-going,
-                $authorize = $result->data->authorization;
-                DB::update('UPDATE investors_packages_linker set duration_paid = 1, last_four_card_numb = ?, reusable = ?, auth_code = ?, status = ? where tnx_ref = ?',
-                [$authorize->last4, $authorize->reusable, $authorize->authorization_code, 1, $trxref]);
-
-                return redirect('/my-investment');
-            }
-        }else{
-            die($result->message);
-        }
-    }
-
-    public function my_investment(){
-        $user_data = TermiiSms::getUser();
-        $i_id = $user_data->i_id;
-        $db = DB::select('SELECT * from investors_packages_linker where i_id = ?', [$i_id]);
-        return view('user.myinvestment')->with('data', $db);
+        print_r($result)
     }
 }

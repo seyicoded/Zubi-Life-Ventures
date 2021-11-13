@@ -1,0 +1,42 @@
+{
+    "sourceFile": "database/11-11-2021.sql",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1636759271548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1636760702130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,3 @@\n CREATE TABLE `zubi_venture`.`investors_packages_linker` ( `u_id` INT NOT NULL AUTO_INCREMENT ,  `p_id` INT NOT NULL ,  `duration_count` INT NOT NULL ,  `duration_paid` INT NOT NULL DEFAULT '0' ,  `amount_paid` TEXT NOT NULL DEFAULT '0' ,  `currency` VARCHAR(760) NOT NULL DEFAULT 'NGN' ,  `amount_to_pay` TEXT NOT NULL ,  `last_four_card_numb` TEXT NULL ,  `email` TEXT NULL ,  `reusable` INT NULL ,  `auth_code` INT NULL ,  `status` INT NOT NULL DEFAULT '0' ,  `date_updated` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,    PRIMARY KEY  (`u_id`)) ENGINE = InnoDB;\n+\n+ALTER TABLE `investors_packages_linker`  ADD `tnx_ref` TEXT NOT NULL  AFTER `duration_count`;\n"
+                },
+                {
+                    "date": 1636761671657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,5 @@\n CREATE TABLE `zubi_venture`.`investors_packages_linker` ( `u_id` INT NOT NULL AUTO_INCREMENT ,  `p_id` INT NOT NULL ,  `duration_count` INT NOT NULL ,  `duration_paid` INT NOT NULL DEFAULT '0' ,  `amount_paid` TEXT NOT NULL DEFAULT '0' ,  `currency` VARCHAR(760) NOT NULL DEFAULT 'NGN' ,  `amount_to_pay` TEXT NOT NULL ,  `last_four_card_numb` TEXT NULL ,  `email` TEXT NULL ,  `reusable` INT NULL ,  `auth_code` INT NULL ,  `status` INT NOT NULL DEFAULT '0' ,  `date_updated` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,    PRIMARY KEY  (`u_id`)) ENGINE = InnoDB;\n \n ALTER TABLE `investors_packages_linker`  ADD `tnx_ref` TEXT NOT NULL  AFTER `duration_count`;\n+\n+ALTER TABLE `investors_packages_linker`  ADD `i_id` INT NOT NULL  AFTER `u_id`;\n"
+                },
+                {
+                    "date": 1636761705696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,4 +2,6 @@\n \n ALTER TABLE `investors_packages_linker`  ADD `tnx_ref` TEXT NOT NULL  AFTER `duration_count`;\n \n ALTER TABLE `investors_packages_linker`  ADD `i_id` INT NOT NULL  AFTER `u_id`;\n+\n+ALTER TABLE `investors_packages_linker` CHANGE `u_id` `ip_id` INT(11) NOT NULL AUTO_INCREMENT;\n"
+                },
+                {
+                    "date": 1636765714661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,4 +4,6 @@\n \n ALTER TABLE `investors_packages_linker`  ADD `i_id` INT NOT NULL  AFTER `u_id`;\n \n ALTER TABLE `investors_packages_linker` CHANGE `u_id` `ip_id` INT(11) NOT NULL AUTO_INCREMENT;\n+\n+ALTER TABLE `investors_packages_linker` CHANGE `reusable` `reusable` TEXT NULL DEFAULT NULL;\n"
+                },
+                {
+                    "date": 1636765742131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,4 +6,7 @@\n \n ALTER TABLE `investors_packages_linker` CHANGE `u_id` `ip_id` INT(11) NOT NULL AUTO_INCREMENT;\n \n ALTER TABLE `investors_packages_linker` CHANGE `reusable` `reusable` TEXT NULL DEFAULT NULL;\n+\n+\n+ALTER TABLE `investors_packages_linker` CHANGE `auth_code` `auth_code` TEXT NULL DEFAULT NULL;\n"
+                },
+                {
+                    "date": 1636766072963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,4 +9,6 @@\n ALTER TABLE `investors_packages_linker` CHANGE `reusable` `reusable` TEXT NULL DEFAULT NULL;\n \n \n ALTER TABLE `investors_packages_linker` CHANGE `auth_code` `auth_code` TEXT NULL DEFAULT NULL;\n+\n+ALTER TABLE `investors_packages_linker` DROP `amount_paid`;\n"
+                }
+            ],
+            "date": 1636759271548,
+            "name": "Commit-0",
+            "content": "CREATE TABLE `zubi_venture`.`investors_packages_linker` ( `u_id` INT NOT NULL AUTO_INCREMENT ,  `p_id` INT NOT NULL ,  `duration_count` INT NOT NULL ,  `duration_paid` INT NOT NULL DEFAULT '0' ,  `amount_paid` TEXT NOT NULL DEFAULT '0' ,  `currency` VARCHAR(760) NOT NULL DEFAULT 'NGN' ,  `amount_to_pay` TEXT NOT NULL ,  `last_four_card_numb` TEXT NULL ,  `email` TEXT NULL ,  `reusable` INT NULL ,  `auth_code` INT NULL ,  `status` INT NOT NULL DEFAULT '0' ,  `date_updated` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  `date_created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,    PRIMARY KEY  (`u_id`)) ENGINE = InnoDB;\n"
+        }
+    ]
+}

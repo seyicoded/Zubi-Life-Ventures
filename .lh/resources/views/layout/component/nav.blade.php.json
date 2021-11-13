@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 16,
+            "activePatchIndex": 17,
             "patches": [
                 {
                     "date": 1636569026143,
@@ -72,6 +72,10 @@
                 {
                     "date": 1636574785123,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n                 <li><a class=\"nav-link scrollto\" href=\"#services\">Services</a></li>\n                 <li><a class=\"nav-link scrollto\" href=\"#contact\">Contact</a></li>\n                 {{-- <li><a class=\"nav-link scrollto \" href=\"#portfolio\">Portfolio</a></li> --}}\n                 {{-- <li><a class=\"nav-link scrollto\" href=\"#team\">Team</a></li> --}}\n-                <li class=\"dropdown\"><a href=\"#\"><span>{{base64_decode($_COOKIE[(sha1('user_name_in_zubi_venture'))])}} </span> <i class=\"bi bi-chevron-down\"></i></a>\n+                <li class=\"dropdown\"><a href=\"#\"><span>{{base64_decode($_COOKIE[(sha1('user_name_in_zubi_venture'))])}} ({{base64_decode($_COOKIE[(sha1('user_code_in_zubi_venture'))])}}) </span> <i class=\"bi bi-chevron-down\"></i></a>\n                 <ul>\n                     <li><a href=\"#\">My Investments</a></li>\n                     {{-- <li class=\"dropdown\"><a href=\"#\"><span>Deep Drop Down</span> <i class=\"bi bi-chevron-right\"></i></a>\n                     <ul>\n"
+                },
+                {
+                    "date": 1636763867727,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n                 {{-- <li><a class=\"nav-link scrollto \" href=\"#portfolio\">Portfolio</a></li> --}}\n                 {{-- <li><a class=\"nav-link scrollto\" href=\"#team\">Team</a></li> --}}\n                 <li class=\"dropdown\"><a href=\"#\"><span>{{base64_decode($_COOKIE[(sha1('user_name_in_zubi_venture'))])}} ({{base64_decode($_COOKIE[(sha1('user_code_in_zubi_venture'))])}}) </span> <i class=\"bi bi-chevron-down\"></i></a>\n                 <ul>\n-                    <li><a href=\"#\">My Investments</a></li>\n+                    <li><a href=\"my-investment\">My Investments</a></li>\n                     {{-- <li class=\"dropdown\"><a href=\"#\"><span>Deep Drop Down</span> <i class=\"bi bi-chevron-right\"></i></a>\n                     <ul>\n                         <li><a href=\"#\">Deep Drop Down 1</a></li>\n                         <li><a href=\"#\">Deep Drop Down 2</a></li>\n"
                 }
             ],
             "date": 1636569026143,

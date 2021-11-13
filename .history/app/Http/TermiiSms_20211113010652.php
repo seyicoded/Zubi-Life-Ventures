@@ -9,20 +9,7 @@
             return (DB::select('SELECT * from investors where i_id = ?', [$id]))[0];
         }
 
-        public static function cal($amount){
-            $amount = intval($amount);
-            $onefivepercent = (($amount) * 1.5) / 100;
-            if($amount >1499){
-                $amount = $amount + $onefivepercent + 100;
-            }else{
-                $amount = $amount + $onefivepercent;
-            }
-
-            return $amount;
-        }
-
         public static function initial_pay($email, $amount, $tnx_ref){
-            $amount = TermiiSms::cal($amount);
             // START PAYMENT PROCESS
             $url = "https://api.paystack.co/transaction/initialize";
             $fields = [

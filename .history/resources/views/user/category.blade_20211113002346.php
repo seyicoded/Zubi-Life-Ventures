@@ -25,8 +25,8 @@
 
   <script>
       function subscribe(p_id){
-          if( confirm("If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay") ){
-              window.location.href = "{{url('subscibe_now')}}?p_id="+p_id;
+          if( confirm('a') ){
+
           }
       }
   </script>

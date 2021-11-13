@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1636568967850,
@@ -20,6 +20,26 @@
                 {
                     "date": 1636634009719,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,5 +69,6 @@\n // user aspect\n Route::group(['namespace'=>'User'], function(){\n \n     // bottom side for dynamic category route and it content\n+    Route::get('/{route_name}', 'Logic1@view_categories');\n });\n"
+                },
+                {
+                    "date": 1636759770730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,5 +70,6 @@\n Route::group(['namespace'=>'User'], function(){\n \n     // bottom side for dynamic category route and it content\n     Route::get('/{route_name}', 'Logic1@view_categories');\n+    Route::get('/subscibe_now', 'Logic1@activate_subscription');\n });\n"
+                },
+                {
+                    "date": 1636759840848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n });\n \n // user aspect\n Route::group(['namespace'=>'User'], function(){\n+    Route::get('/subscibe_now', 'Logic1@activate_subscription');\n \n     // bottom side for dynamic category route and it content\n     Route::get('/{route_name}', 'Logic1@view_categories');\n-    Route::get('/subscibe_now', 'Logic1@activate_subscription');\n });\n"
+                },
+                {
+                    "date": 1636762431460,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,8 +68,10 @@\n \n // user aspect\n Route::group(['namespace'=>'User'], function(){\n     Route::get('/subscibe_now', 'Logic1@activate_subscription');\n+    Route::get('/callback1', 'Logic1@validate_payment');\n \n+\n     // bottom side for dynamic category route and it content\n     Route::get('/{route_name}', 'Logic1@view_categories');\n });\n"
+                },
+                {
+                    "date": 1636763766443,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,11 @@\n // user aspect\n Route::group(['namespace'=>'User'], function(){\n     Route::get('/subscibe_now', 'Logic1@activate_subscription');\n     Route::get('/callback1', 'Logic1@validate_payment');\n+    Route::get('/my-transaction', 'Logic1@my_transaction');\n \n \n+\n     // bottom side for dynamic category route and it content\n     Route::get('/{route_name}', 'Logic1@view_categories');\n });\n"
+                },
+                {
+                    "date": 1636763852210,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,9 @@\n // user aspect\n Route::group(['namespace'=>'User'], function(){\n     Route::get('/subscibe_now', 'Logic1@activate_subscription');\n     Route::get('/callback1', 'Logic1@validate_payment');\n-    Route::get('/my-transaction', 'Logic1@my_transaction');\n+    Route::get('/my-investment', 'Logic1@my_investment');\n \n \n \n     // bottom side for dynamic category route and it content\n"
                 }
             ],
             "date": 1636568967850,
