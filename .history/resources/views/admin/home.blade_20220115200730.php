@@ -1,16 +1,3 @@
-<?php
-    // it was either core php this, or blade php then go back to all controller route caller and adding an array of stdclass.. so guess😅
-    // $a_id = base64_decode($_COOKIE[sha1('admin_id')]);
-    // $admin_data = (DB::select('select * from admins where a_id = ?', [$a_id])[0]) ;
-
-    $num_worker = count(DB::select('SELECT * from admins where a_status = ? AND role = 2', [1]));
-    $num_category = count(DB::select('SELECT * from category where status = ?', [1]));
-    $num_investments = count(DB::select('SELECT * from packages where status = ?', [1]));
-    $num_investors = count(DB::select('SELECT * from investors where i_status = ?', [1]));
-    $num_active_ongoing_investment = count(DB::select('SELECT * from investors_packages_linker where status = ?', [1]));
-    $num_total_engaged_investment = count(DB::select('SELECT * from investors_packages_linker where status >= ?', [1]));
-?>
-
 @extends('admin.layout.app')
 @section('content')
     <div>
@@ -20,8 +7,8 @@
                 <a>
                   <div class="flexit space-between">
                     <div>
-                      <p class="base-text mb-3">Workers</p>
-                      <h5 class="heading-five">{{number_format($num_worker)}}</h5>
+                      <p class="base-text mb-3">Patients</p>
+                      <h5 class="heading-five">10000</h5>
                     </div>
                     <svg width="50" height="50" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="35" cy="35" r="35" fill="#E9EBEB"/>
@@ -40,8 +27,8 @@
                 <a>
                 <div class="flexit space-between">
                   <div>
-                    <p class="base-text mb-3">Category|Group</p>
-                    <h5 class="heading-five">{{number_format($num_category)}}</h5>
+                    <p class="base-text mb-3">Doctors</p>
+                    <h5 class="heading-five">10000</h5>
                   </div>
                   <svg width="50" height="50" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="35" cy="35" r="35" fill="#E9EBEB"/>
@@ -59,8 +46,8 @@
                 <a >
                   <div class="flexit space-between">
                     <div>
-                      <p class="base-text mb-3">Site Available Investments</p>
-                      <h5 class="heading-five">{{number_format($num_investments)}}</h5>
+                      <p class="base-text mb-3">Products</p>
+                      <h5 class="heading-five">10000</h5>
                     </div>
                     <svg width="50" height="50" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="35" cy="35" r="35" fill="#E9EBEB"/>
@@ -79,8 +66,8 @@
                   <a >
                     <div class="flexit space-between">
                       <div>
-                        <p class="base-text mb-3">Investors</p>
-                        <h5 class="heading-five">{{number_format($num_investors)}}</h5>
+                        <p class="base-text mb-3">Products</p>
+                        <h5 class="heading-five">10000</h5>
                       </div>
                       <svg width="50" height="50" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="35" cy="35" r="35" fill="#E9EBEB"/>
@@ -99,8 +86,8 @@
                   <a >
                     <div class="flexit space-between">
                       <div>
-                        <p class="base-text mb-3">Active On-Going Investments</p>
-                        <h5 class="heading-five">{{number_format($num_active_ongoing_investment)}}</h5>
+                        <p class="base-text mb-3">Products</p>
+                        <h5 class="heading-five">10000</h5>
                       </div>
                       <svg width="50" height="50" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="35" cy="35" r="35" fill="#E9EBEB"/>
@@ -119,8 +106,8 @@
                   <a >
                     <div class="flexit space-between">
                       <div>
-                        <p class="base-text mb-3">Total Investments Enaged</p>
-                        <h5 class="heading-five">{{number_format($num_total_engaged_investment)}}</h5>
+                        <p class="base-text mb-3">Products</p>
+                        <h5 class="heading-five">10000</h5>
                       </div>
                       <svg width="50" height="50" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="35" cy="35" r="35" fill="#E9EBEB"/>

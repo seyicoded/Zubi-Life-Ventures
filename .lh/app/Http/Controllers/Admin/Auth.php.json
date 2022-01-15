@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app/Http/Controllers/Admin/Auth.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1638225989388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1638225989388,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers\\Admin;\n\nuse Illuminate\\Http\\Request;\nuse App\\Http\\Controllers\\Controller;\nuse App\\Http\\TermiiSms;\nuse Illuminate\\Support\\Facades\\DB;\n\nclass Auth extends Controller\n{\n    //\n    public function login_admin(Request $request){\n        if($request->email == \"\"){\n            return response()->json([\"status\"=> 0, \"message\"=>\"email is required\"], 200);\n        }\n\n        if($request->password == \"\"){\n            return response()->json([\"status\"=> 0, \"message\"=>\"password is required\"], 200);\n        }\n\n        $username = strtolower($request->email);\n        $password = strtolower($request->password);\n        $password = sha1($password);\n        //run checker\n        $res_data = DB::select('SELECT * from admins where a_username = ? && a_password = ?', [$username, $password]);\n        if(count($res_data) != 0){\n            //found process info to cookies\n            //$_COOKIE[sha1('is_admin_signed_in_medoncall')]\n            //login user for a year'\n            if(intval($res_data[0]->a_status) == 1){\n                setcookie(sha1('is_admin_signed_in_zubi_venture'),sha1('admin_signed_in'), (time() + (86400 * 365) ),\"/\");\n                setcookie(sha1('zn_admin_id'),base64_encode($res_data[0]->a_id), (time() + (86400 * 365) ),\"/\");\n                return redirect(url('/admin'));\n            }else{\n                return view('admin.signin')->with('error', 'Account Suspended');\n                // return response()->json([\"status\"=> 2, \"message\"=>\"Account Suspended\"], 200);\n            }\n\n        }else{\n            return view('admin.signin')->with('error', 'account not found on server');\n            // return response()->json([\"status\"=> 0, \"message\"=>\"account not found on server\"], 200);\n        }\n    }\n\n    public function logout_now(){\n        setcookie(sha1('is_admin_signed_in_zubi_venture'),'', (time() - (86400 * 765 * 2) ),\"/\");\n        setcookie(sha1('zn_admin_id'),'', (time() - (86400 * 765 * 2) ),\"/\");\n        return redirect(url('/admin'));\n    }\n}\n"
+        }
+    ]
+}

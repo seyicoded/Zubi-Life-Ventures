@@ -1,14 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-<script>
-    function subscribe(p_id){
-        window.location.href = "{{url('subscibe_now')}}?p_id="+p_id;
-        // if( confirm("If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay") ){
-        //     window.location.href = "{{url('subscibe_now')}}?p_id="+p_id;
-        // }
-    }
-</script>
     <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container" data-aos="fade-up">
@@ -102,7 +94,7 @@
           <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
             <div class="icon-box mt-5 mt-lg-0" data-aos="zoom-in" data-aos-delay="150">
               <i class="bx bx-receipt"></i>
-              <h4>Filing Method</h4>
+              <h4>Filing</h4>
               <p>Records are also occupationally backed-up so feel secured</p>
             </div>
             <div class="icon-box mt-5" data-aos="zoom-in" data-aos-delay="150">
@@ -135,70 +127,7 @@
           <p>Check our Services</p>
         </div>
 
-        <div class="w3-row">
-            @foreach ($data['packages'] as $dt)
-                <div class="w3-col s12 m6 l4 w3-padding w3-card w3-round">
-                    <div class="w3-row">
-                        <div class="w3-col s12 m12 l12">
-                            <div id="carouselId" class="carousel slide" data-ride="carousel">
-                                  <?php
-                                      $o_im = DB::select('SELECT * from package_other_images where p_id = ?', [$dt->p_id]);
-                                      $count = 1;
-                                  ?>
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carouselId" data-slide-to="0" class="active"></li>
-                                    @foreach ($o_im as $ddd)
-                                      <li data-target="#carouselId" data-slide-to="{{$count}}"></li>
-                                      <?php $count++;?>
-                                    @endforeach
-                                </ol>
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <img src="{{url('auto_images/packages/'.$dt->p_image)}}" style="height: 300px" alt="slide">
-                                    </div>
-                                    @foreach ($o_im as $image)
-                                      <div class="carousel-item">
-                                          <img src="{{url('auto_images/packages_other/'.$image->images)}}" style="height: 300px" alt="slide">
-                                      </div>
-                                    @endforeach
-                                </div>
-                                <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
-                            {{-- <img src="{{url('auto_images/pa')}}" /> --}}
-                        </div>
-                        <div class="w3-col s12 m12 l12">
-                            <div style="display: flex; flex-direction: column; flex: 1">
-
-                              <div style="display: flex; flex-direction: column; flex: 1">
-                                  <h3 class="w3-center"><span style="font-weight: bold">{{$dt->p_name}}</span></h3><br />
-                                  <small style="margin-top: 15px">DESCRIPTION: <span style="font-weight: bold">{{$dt->p_desc}}</span></small> <br />
-                                  <small style="margin-top: 15px">DURATION: <span style="font-weight: bold">{{$dt->duration}} days</span></small> <br />
-                                  <small style="margin-top: 15px">AMOUNT: <span style="font-weight: bold">{{$dt->currency.number_format($dt->amount_one)}} per day</span></small><br />
-                                  <marquee>note: card used for this package would be charged with daily amount until investment is completed</marquee>
-                              </div>
-
-                              <div style="display: flex; flex-direction: column; flex: 1">
-                                  <button type="button" name="" id="" class="btn btn-primary btn-lg btn-block" onclick="subscribe('{{$dt->p_id}}')">INVEST NOW</button>
-                              </div>
-
-                            </div>
-                            {{-- content --}}
-
-
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-          </div>
-
-        {{-- <div class="row">
+        <div class="row">
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
@@ -247,7 +176,7 @@
             </div>
           </div>
 
-        </div> --}}
+        </div>
 
       </div>
     </section><!-- End Services Section -->
@@ -258,15 +187,15 @@
 
         <div class="text-center">
           <h3>Call To Action</h3>
-          <p> A Click Away from our agent.</p>
-          <a class="cta-btn" href="tel:+2349066107789">Call Now</a>
+          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <a class="cta-btn" href="#">Call To Action</a>
         </div>
 
       </div>
     </section><!-- End Cta Section -->
 
     <!-- ======= Counts Section ======= -->
-    {{-- <section id="counts" class="counts">
+    <section id="counts" class="counts">
       <div class="container" data-aos="fade-up">
 
         <div class="row no-gutters">
@@ -315,10 +244,10 @@
         </div>
 
       </div>
-    </section><!-- End Counts Section --> --}}
+    </section><!-- End Counts Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    {{-- <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials">
       <div class="container" data-aos="zoom-in">
 
         <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
@@ -393,10 +322,10 @@
         </div>
 
       </div>
-    </section><!-- End Testimonials Section --> --}}
+    </section><!-- End Testimonials Section -->
 
     <!-- ======= Team Section ======= -->
-    {{-- <section id="team" class="team">
+    <section id="team" class="team">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -481,7 +410,7 @@
         </div>
 
       </div>
-    </section><!-- End Team Section --> --}}
+    </section><!-- End Team Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -493,8 +422,7 @@
         </div>
 
         <div>
-          {{-- <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/place/Nyanya+Market/@9.0254121,7.5665448,17z/data=!3m1!4b1!4m5!3m4!1s0x104e08d5655577b3:0x6bb2688819bdf9b9!8m2!3d9.0254121!4d7.5687335" frameborder="0" allowfullscreen></iframe> --}}
-          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.324609996125!2d7.566572435143554!3d9.025649884842915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e08d5655577b3%3A0x6bb2688819bdf9b9!2sNyanya%20Market!5e0!3m2!1sen!2sng!4v1642271695007!5m2!1sen!2sng" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <div class="row mt-5">
@@ -504,19 +432,19 @@
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>Block M, Suite 8 Powa Plaza Branch: Suit C291, Opp. Anpt. Nyanya Market.</p>
+                <p>A108 Adam Street, New York, NY 535022</p>
               </div>
 
               <div class="email">
-                <i class="bi bi-box"></i>
-                <h4>RC:</h4>
-                <p>3086396</p>
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>info@example.com</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+234 9066107789 or +234 8169129449</p>
+                <p>+1 5589 55488 55s</p>
               </div>
 
             </div>
@@ -525,7 +453,7 @@
 
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            {{-- <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -546,7 +474,7 @@
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
               <div class="text-center"><button type="submit">Send Message</button></div>
-            </form> --}}
+            </form>
 
           </div>
 

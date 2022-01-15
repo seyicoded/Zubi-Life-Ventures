@@ -1,14 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-<script>
-    function subscribe(p_id){
-        window.location.href = "{{url('subscibe_now')}}?p_id="+p_id;
-        // if( confirm("If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay") ){
-        //     window.location.href = "{{url('subscibe_now')}}?p_id="+p_id;
-        // }
-    }
-</script>
     <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container" data-aos="fade-up">
@@ -493,8 +485,7 @@
         </div>
 
         <div>
-          {{-- <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/place/Nyanya+Market/@9.0254121,7.5665448,17z/data=!3m1!4b1!4m5!3m4!1s0x104e08d5655577b3:0x6bb2688819bdf9b9!8m2!3d9.0254121!4d7.5687335" frameborder="0" allowfullscreen></iframe> --}}
-          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.324609996125!2d7.566572435143554!3d9.025649884842915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e08d5655577b3%3A0x6bb2688819bdf9b9!2sNyanya%20Market!5e0!3m2!1sen!2sng!4v1642271695007!5m2!1sen!2sng" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <div class="row mt-5">
@@ -507,8 +498,8 @@
                 <p>Block M, Suite 8 Powa Plaza Branch: Suit C291, Opp. Anpt. Nyanya Market.</p>
               </div>
 
-              <div class="email">
-                <i class="bi bi-box"></i>
+              <div class="box">
+                <i class="bi bi-envelope"></i>
                 <h4>RC:</h4>
                 <p>3086396</p>
               </div>

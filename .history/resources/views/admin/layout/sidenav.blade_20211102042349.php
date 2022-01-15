@@ -26,7 +26,7 @@
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="/admin"><span class="icon home" aria-hidden="true"></span>Mini Info</a>
+                    <a class="active" href="/"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
@@ -126,7 +126,7 @@
             <span class="system-menu__title">system</span>
             <ul class="sidebar-body-menu">
                 <li>
-                    {{-- <a href="##"><span class="icon setting" aria-hidden="true"></span>Settings</a> --}}
+                    <a href="##"><span class="icon setting" aria-hidden="true"></span>Settings</a>
                 </li>
             </ul>
         </div>

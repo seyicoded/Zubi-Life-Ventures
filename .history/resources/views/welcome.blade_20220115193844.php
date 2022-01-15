@@ -1,14 +1,6 @@
 @extends('layout.app')
 
 @section('content')
-<script>
-    function subscribe(p_id){
-        window.location.href = "{{url('subscibe_now')}}?p_id="+p_id;
-        // if( confirm("If you've subscribed for this before and want to do a payment, click cancel and navigate to my investment, else click okay") ){
-        //     window.location.href = "{{url('subscibe_now')}}?p_id="+p_id;
-        // }
-    }
-</script>
     <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container" data-aos="fade-up">

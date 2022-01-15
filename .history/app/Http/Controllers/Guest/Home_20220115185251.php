@@ -12,7 +12,7 @@ class Home extends Controller
     public function home(){
         $cat = DB::select('SELECT * from category where status = ?', [1]);
 
-        $packages = DB::select('SELECT * from packages as a INNER JOIN category as b ON a.c_id=b.c_id where a.status = 1', []);
+        $packages = DB::select('SELECT * from packages where status = 1', []);
 
         return view('welcome')->with('data', ['cat' => $cat, 'packages' => $packages]);
     }

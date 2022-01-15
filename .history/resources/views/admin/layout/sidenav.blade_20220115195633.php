@@ -26,7 +26,7 @@
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a class="active" href="/admin"><span class="icon home" aria-hidden="true"></span>Mini Info</a>
+                    <a class="active" href="/admin"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">

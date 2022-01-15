@@ -44,8 +44,8 @@ class Auth extends Controller
     }
 
     public function logout_now(){
-        setcookie(sha1('is_admin_signed_in_zubi_venture'),'', (time() - (86400 * 765 * 2) ),"/");
-        setcookie(sha1('zn_admin_id'),'', (time() - (86400 * 765 * 2) ),"/");
+        setcookie(sha1('is_admin_signed_in_zubi_venture'),'', (time() - (86400 * 765) ),"/");
+        setcookie(sha1('zn_admin_id'),'', (time() - (86400 * 765) ),"/");
         return redirect(url('/admin'));
     }
 }
